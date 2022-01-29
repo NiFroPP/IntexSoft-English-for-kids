@@ -1,0 +1,13 @@
+@import "../../assets/styles/variables";
+
+.main {
+  background-color: $main-background;
+  &__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    min-height: calc(100vh - 100px - 45px);
+    margin: 0 auto;
+  }
+}

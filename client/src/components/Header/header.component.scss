@@ -1,0 +1,13 @@
+@import "src/assets/styles/variables.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  background-color: $header-background;
+
+  &__container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}

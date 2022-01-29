@@ -1,0 +1,8 @@
+@import './fonts';
+@import './reset';
+@import './variables';
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: $main-text;
+}
