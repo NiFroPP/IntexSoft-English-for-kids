@@ -1,46 +1,62 @@
-import mongoose from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import config from '../config'
-
 import UserModel, { User } from '../models/user.model'
-import { BadRequestError } from '../errors/bad-request.error'
+import CustomErrors from '../errors/API.error'
 
 class UserService {
-  async registration(email: string, password: string): Promise<User> {
-    const candidate = await UserModel.findOne({ email })
+  constructor(private model: Model<User>) {
+    this.model = model
+  }
+
+  async registration(
+    email: string,
+    password: string,
+    username: string
+  ): Promise<User> {
+    const candidate = await this.model.findOne({ email })
     if (candidate) {
-      throw new BadRequestError(`User with email: ${email} already exist`)
+      throw CustomErrors.badRequestError(
+        `User with email: ${email} already exist`
+      )
     }
 
-    const hashPassword = await bcrypt.hash(password, config.salt)
+    const salt = await bcrypt.genSalt(+config.salt)
+    const hashPassword = await bcrypt.hash(password, salt)
 
-    return await UserModel.create({
+    const user = await this.model.create({
       _id: new mongoose.Types.ObjectId(),
       email,
       password: hashPassword,
+      username,
     })
+
+    return user
   }
 
-  async login(email: string, password: string): Promise<string> {
-    const user = await UserModel.findOne({ email })
+  async login(email: string, password: string) {
+    const user = await this.model.findOne({ email })
     if (!user) {
-      throw new BadRequestError(`User with email: ${email} not exist`)
+      throw CustomErrors.badRequestError(`User with email: ${email} not exist`)
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password)
     if (!isValidPassword) {
-      throw new BadRequestError(`Wrong password entered`)
+      throw CustomErrors.badRequestError(`Wrong password entered`)
     }
 
-    return jwt.sign({ id: user._id }, config.jwtSecretKey, {
-      expiresIn: '1h',
-    })
+    return {
+      token: jwt.sign({ id: user._id }, config.jwtSecretKey, {
+        expiresIn: '1m',
+      }),
+      username: user.username,
+    }
   }
 
   async getAllUsers() {
-    return UserModel.find()
+    return this.model.find()
   }
 }
 
-export default new UserService()
+export default new UserService(UserModel)

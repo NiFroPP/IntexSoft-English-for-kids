@@ -1,27 +1,32 @@
 export interface ActionCreationArguments {
-	email?: string;
-	password?: string;
+	isLogin?: boolean;
+	username?: string;
 }
 
 export const SET_DATA = 'SET_DATA';
 
 export interface User {
-	email: string;
-	password: string;
+	isLogin: boolean;
+	username: string;
 }
 
 const initialStore: User = {
-	email: '',
-	password: ''
+	isLogin: false,
+	username: ''
 };
 
 type StateType = typeof initialStore;
 
+export const setUserDataActionCreation = (payload: ActionCreationArguments) =>
+	({ type: SET_DATA, payload } as const);
+
+type AC1Type = ReturnType<typeof setUserDataActionCreation>;
+
 export type ActionType = AC1Type;
 
 const userReducer = (
-	{ type, payload }: ActionType,
-	state: StateType = initialStore
+	state: StateType = initialStore,
+	{ type, payload }: ActionType
 ): StateType => {
 	switch (type) {
 		case SET_DATA: {
@@ -31,10 +36,5 @@ const userReducer = (
 			return state;
 	}
 };
-
-export const setUserDataActionCreation = (payload: ActionCreationArguments) =>
-	({ type: SET_DATA, payload } as const);
-
-type AC1Type = ReturnType<typeof setUserDataActionCreation>;
 
 export default userReducer;

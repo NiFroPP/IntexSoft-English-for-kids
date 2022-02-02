@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import config from '../config'
-import { UnauthorizedError } from '../errors/unauthorized.error'
+import CustomErrors from '../errors/API.error'
 
 export const authMiddleware = (
   req: Request,
@@ -15,13 +15,13 @@ export const authMiddleware = (
   try {
     const token = req.headers.authorization?.split(' ')[1]
     if (!token) {
-      new UnauthorizedError()
+      throw CustomErrors.unauthorizedError()
     }
 
     jwt.verify(token!, config.jwtSecretKey)
 
     next()
   } catch (e) {
-    throw new UnauthorizedError()
+    throw CustomErrors.unauthorizedError()
   }
 }

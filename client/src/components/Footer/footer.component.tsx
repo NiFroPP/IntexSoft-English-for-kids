@@ -13,6 +13,7 @@ function FooterComponent() {
 					rel="noreferrer">
 					© 2022 NiFroPP
 				</a>
+				<h1 className="footer__title">English for Kids</h1>
 			</div>
 		</footer>
 	);

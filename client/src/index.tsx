@@ -9,10 +9,10 @@ import store from './store/store';
 import './assets/styles/index.scss';
 
 ReactDOM.render(
-	// <Provider store={store}>
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>,
-	// </Provider>,
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>,
 	document.getElementById('root')
 );

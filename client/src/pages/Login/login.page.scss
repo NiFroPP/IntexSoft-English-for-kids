@@ -1,0 +1,65 @@
+@import "src/assets/styles/variables.scss";
+
+.login-page {
+
+  &__field {
+    border: 1px solid $main-text;
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.5s;
+
+    &:hover {
+      box-shadow: 0 0 20px rgb(33 33 33 / 80%);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    padding: 10px;
+    border-bottom: 1px solid $main-text;
+
+    &-input {
+      display: flex;justify-content: space-between;
+      align-items: center;
+
+    }
+
+    & label {
+      padding-right: 10px;
+    }
+  }
+
+  &__error {
+    padding-top: 10px;
+    color: $error-text;
+  }
+
+  &__btn {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & input {
+      width: 75px;
+      transition: all 0.5s;
+
+      &:hover {
+        box-shadow: 0 0 20px rgb(33 33 33 / 80%);
+      }
+    }
+  }
+
+  &__go-to-register {
+    font-size: 12px;
+    color: $main-text;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

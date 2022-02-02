@@ -1,11 +1,22 @@
-import { NextFunction, Request, Response } from 'express'
-import { CustomError } from '../errors/custom.error'
+import { Request, Response, NextFunction } from 'express'
+import CustomErrors from '../errors/API.error'
 
-export const errorMiddleware = (err: Error, req: Request, res: Response) => {
-  if (err instanceof CustomError) {
-    return res.status(err.statusCode).send({ errors: err.returnErrors() })
+export const errorMiddleware = (
+  err: Error,
+  req: Request,
+  res: Response,
+  // eslint-disable-next-line no-unused-vars
+  next: NextFunction
+) => {
+  if (err instanceof CustomErrors) {
+    if (err.errors.length > 0) {
+      return res
+        .status(err.statusCode)
+        .json({ message: err.message, errors: err.errors })
+    }
+    return res.status(err.statusCode).json({ message: err.message })
   }
-  res.status(500).send({
+  return res.status(500).json({
     errors: [{ message: 'Something went wrong' }],
   })
 }
