@@ -1,0 +1,20 @@
+@import "src/assets/styles/variables";
+
+.home-page {
+  font-size: 24px;
+  color: $main-text;
+
+  & p {
+    padding-bottom: 10px;
+  }
+  
+  &__to-go-select {
+    font-size: 14px;
+    color: $main-text;
+    transition: all 0.5s;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

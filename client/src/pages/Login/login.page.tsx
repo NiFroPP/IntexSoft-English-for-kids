@@ -9,12 +9,13 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from 'react-router-dom';
 
-import schema from '../Registration/validation';
-
-import './login.page.scss';
+import schema from './validation';
 import allEndpoints from '../../api';
 import { useAppDispatch } from '../../hooks/useTypeSelector';
 import { setUserDataActionCreation } from '../../store/reducers/user.reducer';
+import PATHS from '../../models/enum/paths.enum';
+
+import './login.page.scss';
 
 export interface ILogin {
 	email: string;
@@ -56,7 +57,7 @@ function LoginPage() {
 		const response = await allEndpoints.auth.login(data);
 		localStorage.setItem('auth-token', JSON.stringify(response.data));
 		dispatch(setUserDataActionCreation({ username: response.data.username }));
-		navigate('/');
+		navigate(PATHS.ABOUT);
 	};
 
 	return (
@@ -65,7 +66,7 @@ function LoginPage() {
 				<Input label="email" register={register} required errors={errors} />
 				<Input label="password" register={register} required errors={errors} />
 				<div className="login-page__btn">
-					<Link className="login-page__go-to-register" to="/registration">
+					<Link className="login-page__go-to-register" to={PATHS.REGISTRATION}>
 						Create account
 					</Link>
 					<input type="submit" />

@@ -3,7 +3,7 @@ export interface ActionCreationArguments {
 	username?: string;
 }
 
-export const SET_DATA = 'SET_DATA';
+export const SET_DATA = '[user-reducer] SET_DATA';
 
 export interface User {
 	isLogin: boolean;

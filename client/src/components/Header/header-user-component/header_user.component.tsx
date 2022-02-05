@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/useTypeSelector';
+import { setUserDataActionCreation } from '../../../store/reducers/user.reducer';
+import PATHS from '../../../models/enum/paths.enum';
 
 import './header_user.component.scss';
-import { setUserDataActionCreation } from '../../../store/reducers/user.reducer';
 
 function HeaderUserComponent() {
 	const { username, isLogin } = useAppSelector((state) => state.user);
@@ -20,19 +21,16 @@ function HeaderUserComponent() {
 					username: JSON.parse(user).username
 				})
 			);
+			navigate(PATHS.ABOUT);
 		}
 	};
 
 	useEffect(() => loading(), [username]);
 
 	const logout = () => {
-		navigate('/');
+		navigate(PATHS.ABOUT);
 		localStorage.removeItem('auth-token');
 		dispatch(setUserDataActionCreation({ username: '', isLogin: false }));
-	};
-
-	const goToRegister = () => {
-		navigate('/login');
 	};
 
 	return (

@@ -1,0 +1,454 @@
+[
+  {
+    "name": "animals",
+    "nameRU": "животные",
+    "image": "04.png",
+    "cards": [
+      {
+        "name": "bear",
+        "nameRU": "медведь",
+        "image": "01.png",
+        "sound": "01.mp3"
+      },
+      {
+        "name": "cat",
+        "nameRU": "кошка",
+        "image": "02.png",
+        "sound": "02.mp3"
+      },
+      {
+        "name": "fish",
+        "nameRU": "рыба",
+        "image": "03.png",
+        "sound": "03.mp3"
+      },
+      {
+        "name": "fox",
+        "nameRU": "лиса",
+        "image": "04.png",
+        "sound": "04.mp3"
+      },
+      {
+        "name": "hedgehog",
+        "nameRU": "ёж",
+        "image": "05.png",
+        "sound": "05.mp3"
+      },
+      {
+        "name": "hippo",
+        "nameRU": "бегемот",
+        "image": "06.png",
+        "sound": "06.mp3"
+      },
+      {
+        "name": "monkey",
+        "nameRU": "обезьяна",
+        "image": "07.png",
+        "sound": "07.mp3"
+      },
+      {
+        "name": "bird",
+        "nameRU": "птица",
+        "image": "08.png",
+        "sound": "08.mp3"
+      }
+    ]
+  },
+  {
+    "name": "food",
+    "nameRU": "еда",
+    "image": "02.png",
+    "cards": [
+      {
+        "name": "bonbon",
+        "nameRU": "конфета",
+        "image": "01.png",
+        "sound": "pronunciation_en_bonbon.mp3"
+      },
+      {
+        "name": "bread",
+        "nameRU": "хлеб",
+        "image": "02.png",
+        "sound": "pronunciation_en_bread.mp3"
+      },
+      {
+        "name": "chewing gum",
+        "nameRU": "жевательная резинка",
+        "image": "03.png",
+        "sound": "pronunciation_en_chewing_gum.mp3"
+      },
+      {
+        "name": "egg",
+        "nameRU": "яйцо",
+        "image": "04.png",
+        "sound": "pronunciation_en_egg.mp3"
+      },
+      {
+        "name": "ice cream",
+        "nameRU": "мороженое",
+        "image": "05.png",
+        "sound": "pronunciation_en_ice_cream.mp3"
+      },
+      {
+        "name": "milk",
+        "nameRU": "молоко",
+        "image": "06.png",
+        "sound": "pronunciation_en_milk.mp3"
+      },
+      {
+        "name": "pizza",
+        "nameRU": "пицца",
+        "image": "07.png",
+        "sound": "pronunciation_en_pizza.mp3"
+      },
+      {
+        "name": "sugar",
+        "nameRU": "сахар",
+        "image": "08.png",
+        "sound": "pronunciation_en_sugar.mp3"
+      }
+    ]
+  },
+  {
+    "name": "colors",
+    "nameRU": "цвета",
+    "image": "10.png",
+    "cards": [
+      {
+        "name": "blue",
+        "nameRU": "синий",
+        "image": "01.png",
+        "sound": "01.mp3"
+      },
+      {
+        "name": "brown",
+        "nameRU": "коричневый",
+        "image": "02.png",
+        "sound": "02.mp3"
+      },
+      {
+        "name": "green",
+        "nameRU": "зеленый",
+        "image": "03.png",
+        "sound": "03.mp3"
+      },
+      {
+        "name": "orange",
+        "nameRU": "оранжевый",
+        "image": "04.png",
+        "sound": "04.mp3"
+      },
+      {
+        "name": "pink",
+        "nameRU": "розовый",
+        "image": "05.png",
+        "sound": "05.mp3"
+      },
+      {
+        "name": "red",
+        "nameRU": "красный",
+        "image": "06.png",
+        "sound": "06.mp3"
+      },
+      {
+        "name": "yellow",
+        "nameRU": "желтый",
+        "image": "07.png",
+        "sound": "07.mp3"
+      },
+      {
+        "name": "black",
+        "nameRU": "чёрный",
+        "image": "08.png",
+        "sound": "08.mp3"
+      }
+    ]
+  },
+  {
+    "name": "fruit",
+    "nameRU": "фрукты",
+    "image": "02.png",
+    "cards": [
+      {
+        "name": "apple",
+        "nameRU": "яблоко",
+        "image": "01.png",
+        "sound": "pronunciation_en_apple.mp3"
+      },
+      {
+        "name": "banana",
+        "nameRU": "банан",
+        "image": "02.png",
+        "sound": "pronunciation_en_banana.mp3"
+      },
+      {
+        "name": "cherry",
+        "nameRU": "вишня",
+        "image": "03.png",
+        "sound": "pronunciation_en_cherry.mp3"
+      },
+      {
+        "name": "coconut",
+        "nameRU": "кокос",
+        "image": "04.png",
+        "sound": "pronunciation_en_coconut.mp3"
+      },
+      {
+        "name": "kiwi",
+        "nameRU": "киви",
+        "image": "05.png",
+        "sound": "pronunciation_fr_kiwi.mp3"
+      },
+      {
+        "name": "lemon",
+        "nameRU": "лемон",
+        "image": "06.png",
+        "sound": "pronunciation_en_lemon.mp3"
+      },
+      {
+        "name": "orange",
+        "nameRU": "апельсин",
+        "image": "07.png",
+        "sound": "pronunciation_en_orange.mp3"
+      },
+      {
+        "name": "watermelon",
+        "nameRU": "азбуз",
+        "image": "08.png",
+        "sound": "pronunciation_en_watermelon.mp3"
+      }
+    ]
+  },
+  {
+    "name": "heroes",
+    "nameRU": "герои",
+    "image": "01.png",
+    "cards": [
+      {
+        "name": "Princess Ariel",
+        "nameRU": "Принцесса Ариэль",
+        "image": "01.png",
+        "sound": "pronunciation_en_princess_ariel.mp3"
+      },
+      {
+        "name": "Barbie",
+        "nameRU": "Барби",
+        "image": "02.png",
+        "sound": "pronunciation_en_barbie.mp3"
+      },
+      {
+        "name": "Batman",
+        "nameRU": "Бэтмэн",
+        "image": "03.png",
+        "sound": "pronunciation_en_batman.mp3"
+      },
+      {
+        "name": "Donald Duck",
+        "nameRU": "Дональд Дак",
+        "image": "04.png",
+        "sound": "pronunciation_en_donald_duck.mp3"
+      },
+      {
+        "name": "Mickey Mouse",
+        "nameRU": "Мики Маус",
+        "image": "05.png",
+        "sound": "pronunciation_en_mickey_mouse.mp3"
+      },
+      {
+        "name": "Minion",
+        "nameRU": "миньён",
+        "image": "06.png",
+        "sound": "pronunciation_en_minion.mp3"
+      },
+      {
+        "name": "smurf",
+        "nameRU": "смэрфик",
+        "image": "07.png",
+        "sound": "pronunciation_en_smurf.mp3"
+      },
+      {
+        "name": "Tom and Jerry",
+        "nameRU": "Том и Джерри",
+        "image": "08.png",
+        "sound": "pronunciation_en_tom_and_jerry.mp3"
+      }
+    ]
+  },
+  {
+    "name": "nature",
+    "nameRU": "природа",
+    "image": "02.png",
+    "cards": [
+      {
+        "name": "earth",
+        "nameRU": "земля",
+        "image": "01.png",
+        "sound": "pronunciation_en_earth.mp3"
+      },
+      {
+        "name": "fire",
+        "nameRU": "огонь",
+        "image": "02.png",
+        "sound": "pronunciation_en_fire.mp3"
+      },
+      {
+        "name": "lightning",
+        "nameRU": "молния",
+        "image": "03.png",
+        "sound": "pronunciation_en_lightning.mp3"
+      },
+      {
+        "name": "mountain",
+        "nameRU": "гора",
+        "image": "04.png",
+        "sound": "pronunciation_en_mountain.mp3"
+      },
+      {
+        "name": "rainbow",
+        "nameRU": "радуга",
+        "image": "05.png",
+        "sound": "pronunciation_en_rainbow.mp3"
+      },
+      {
+        "name": "sun",
+        "nameRU": "солнце",
+        "image": "06.png",
+        "sound": "pronunciation_en_sun.mp3"
+      },
+      {
+        "name": "tree",
+        "nameRU": "дерево",
+        "image": "07.png",
+        "sound": "pronunciation_en_tree.mp3"
+      },
+      {
+        "name": "water",
+        "nameRU": "вода",
+        "image": "08.png",
+        "sound": "pronunciation_en_water.mp3"
+      }
+    ]
+  },
+  {
+    "name": "numbers",
+    "nameRU": "числа",
+    "image": "07.png",
+    "cards": [
+      {
+        "name": "zero",
+        "nameRU": "ноль",
+        "image": "00.png",
+        "sound": "00.mp3"
+      },
+      {
+        "name": "one",
+        "nameRU": "один",
+        "image": "01.png",
+        "sound": "01.mp3"
+      },
+      {
+        "name": "two",
+        "nameRU": "два",
+        "image": "02.png",
+        "sound": "02.mp3"
+      },
+      {
+        "name": "three",
+        "nameRU": "три",
+        "image": "03.png",
+        "sound": "03.mp3"
+      },
+      {
+        "name": "four",
+        "nameRU": "четыре",
+        "image": "04.png",
+        "sound": "04.mp3"
+      },
+      {
+        "name": "five",
+        "nameRU": "пять",
+        "image": "05.png",
+        "sound": "05.mp3"
+      },
+      {
+        "name": "six",
+        "nameRU": "шесть",
+        "image": "06.png",
+        "sound": "06.mp3"
+      },
+      {
+        "name": "seven",
+        "nameRU": "семь",
+        "image": "07.png",
+        "sound": "07.mp3"
+      },
+      {
+        "name": "eight",
+        "nameRU": "восемь",
+        "image": "08.png",
+        "sound": "08.mp3"
+      },
+      {
+        "name": "nine",
+        "nameRU": "девять",
+        "image": "09.png",
+        "sound": "09.mp3"
+      }
+    ]
+  },
+  {
+    "name": "transport",
+    "nameRU": "транспорт",
+    "image": "05.png",
+    "cards": [
+      {
+        "name": "balloon",
+        "nameRU": "воздушный шар",
+        "image": "01.png",
+        "sound": "pronunciation_en_balloon.mp3"
+      },
+      {
+        "name": "bus",
+        "nameRU": "автобус",
+        "image": "02.png",
+        "sound": "pronunciation_en_bus.mp3"
+      },
+      {
+        "name": "car",
+        "nameRU": "машина",
+        "image": "03.png",
+        "sound": "pronunciation_en_car.mp3"
+      },
+      {
+        "name": "plane",
+        "nameRU": "самолет",
+        "image": "04.png",
+        "sound": "pronunciation_en_plane.mp3"
+      },
+      {
+        "name": "ship",
+        "nameRU": "корабль",
+        "image": "05.png",
+        "sound": "pronunciation_en_ship.mp3"
+      },
+      {
+        "name": "tractor",
+        "nameRU": "трактор",
+        "image": "06.png",
+        "sound": "pronunciation_en_tractor.mp3"
+      },
+      {
+        "name": "train",
+        "nameRU": "поезд",
+        "image": "07.png",
+        "sound": "pronunciation_en_train.mp3"
+      },
+      {
+        "name": "trolleybus",
+        "nameRU": "троллейбус",
+        "image": "08.png",
+        "sound": "pronunciation_en_trolleybus.mp3"
+      }
+    ]
+  }
+]

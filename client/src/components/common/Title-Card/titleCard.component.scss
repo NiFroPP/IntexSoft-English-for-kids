@@ -1,0 +1,27 @@
+@import "../../../assets/styles/variables";
+
+.title-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+    text-align: center;
+
+    & h4 {
+      flex-grow: 1;
+    }
+
+    & h4::first-letter {
+      text-transform: uppercase;
+    }
+
+  &__language {
+    width: 30px;
+    height: 18px;
+    border-radius: 5px;
+    color: $main-text;
+    border: 1px solid $header-background;
+    background-color: $main-background;
+  }
+}

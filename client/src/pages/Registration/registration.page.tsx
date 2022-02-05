@@ -7,10 +7,11 @@ import {
 	UseFormRegister
 } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import schema from './validation';
 import allEndpoints from '../../api';
+import PATHS from '../../models/enum/paths.enum';
 
 import './registration.page.scss';
 
@@ -44,6 +45,8 @@ function Input({ label, register, required, errors }: InputProps) {
 }
 
 function RegistrationPage() {
+	const navigate = useNavigate();
+
 	const {
 		register,
 		handleSubmit,
@@ -51,10 +54,8 @@ function RegistrationPage() {
 	} = useForm<IRegistration>({ resolver: yupResolver(schema) });
 
 	const onSubmit: SubmitHandler<IRegistration> = async (data) => {
-		console.log(data);
-		const response = await allEndpoints.auth.registration(data);
-		// const response = await allEndpoints.auth.getAllUsers();
-		console.log(response);
+		await allEndpoints.auth.registration(data);
+		navigate(PATHS.LOGIN);
 	};
 
 	return (
@@ -66,7 +67,7 @@ function RegistrationPage() {
 				<Input label="email" register={register} required errors={errors} />
 				<Input label="password" register={register} required errors={errors} />
 				<div className="registration-page__btn">
-					<Link className="registration-page__go-to-login" to="/login">
+					<Link className="registration-page__go-to-login" to={PATHS.LOGIN}>
 						Login
 					</Link>
 					<input type="submit" />

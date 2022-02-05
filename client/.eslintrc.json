@@ -39,7 +39,9 @@
 //    "jsx-a11y/label-has-associated-control": "off",
     "default-param-last": "off",
     "@typescript-eslint/default-param-last": "off",
-    "no-param-reassign": ["error", { "props": false }]
+    "no-param-reassign": ["error", { "props": false }],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["off"]
   }
 //  "settings": {
 //    "import/resolver": {

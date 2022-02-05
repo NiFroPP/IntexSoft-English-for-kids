@@ -1,7 +1,6 @@
 @import "src/assets/styles/variables.scss";
 
 .login-page {
-
   &__field {
     border: 1px solid $main-text;
     border-radius: 5px;
@@ -25,7 +24,6 @@
     &-input {
       display: flex;justify-content: space-between;
       align-items: center;
-
     }
 
     & label {
