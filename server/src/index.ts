@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import config from './config'
 import userRouter from './routers/user.router'
+import categoryRouter from './routers/category.router'
 import { errorMiddleware } from './middlewares/error.middleware'
 
 const app = express()
@@ -10,6 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(userRouter)
+app.use('/categories', categoryRouter)
 app.use(errorMiddleware)
 
 const start = async (): Promise<void> => {
