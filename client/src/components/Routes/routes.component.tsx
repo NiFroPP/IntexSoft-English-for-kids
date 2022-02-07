@@ -2,13 +2,15 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/useTypeSelector';
+import { getUser } from '../../store/selectors/index.selector';
 import PATHS from '../../models/enum/paths.enum';
+
 import LoginPage from '../../pages/Login/login.page';
 import RegistrationPage from '../../pages/Registration/registration.page';
 import AboutPage from '../../pages/About/about.page';
 import CategoriesPage from '../../pages/Categories/categories.page';
 import CategoryPage from '../../pages/Category/category.page';
-import LoadingComponent from '../common/Loading/loading.component';
+import UserSettingPage from '../../pages/User_Setting/userSetting.page';
 
 import './routes.component.scss';
 
@@ -29,6 +31,10 @@ const privateRoutes: IRoutes[] = [
 	{
 		path: `${PATHS.CATEGORY}/:id`,
 		element: <CategoryPage />
+	},
+	{
+		path: PATHS.USER_SETTING,
+		element: <UserSettingPage />
 	}
 ];
 
@@ -48,28 +54,24 @@ const guestRoutes: IRoutes[] = [
 ];
 
 function RoutesComponent() {
-	const { isLogin } = useAppSelector((state) => state.user);
+	const { isLogin } = useAppSelector(getUser);
 
 	return (
-		// {isLoading ? <LoadingComponent /> : <RoutesComponent />}
-
-		<main className="main">
-			<div className="main__container">
-				{isLogin ? (
-					<Routes>
-						{privateRoutes.map(({ path, element }) => (
-							<Route path={path} element={element} key={path} />
-						))}
-					</Routes>
-				) : (
-					<Routes>
-						{guestRoutes.map(({ path, element }) => (
-							<Route path={path} element={element} key={path} />
-						))}
-					</Routes>
-				)}
-			</div>
-		</main>
+		<div className="wrapper">
+			{isLogin ? (
+				<Routes>
+					{privateRoutes.map(({ path, element }) => (
+						<Route path={path} element={element} key={path} />
+					))}
+				</Routes>
+			) : (
+				<Routes>
+					{guestRoutes.map(({ path, element }) => (
+						<Route path={path} element={element} key={path} />
+					))}
+				</Routes>
+			)}
+		</div>
 	);
 }
 

@@ -33,11 +33,20 @@ function HeaderUserComponent() {
 		dispatch(setUserDataActionCreation({ username: '', isLogin: false }));
 	};
 
+	const goToSettingPage = () => {
+		navigate(PATHS.USER_SETTING);
+	};
+
 	return (
 		<div className="header__user">
 			{isLogin ? (
 				<>
-					<div className="header__user-name">{username}</div>
+					<div
+						className="header__user-name"
+						onClick={goToSettingPage}
+						aria-hidden="true">
+						{username}
+					</div>
 					<button type="button" className="header__user-btn" onClick={logout}>
 						Logout
 					</button>

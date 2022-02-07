@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Data from '../../assets/data.json';
+import { useAppSelector } from '../../hooks/useTypeSelector';
+import { getCategory } from '../../store/selectors/index.selector';
 import PATHS from '../../models/enum/paths.enum';
 import TitleCardComponent from '../../components/common/Title-Card/titleCard.component';
 
@@ -9,10 +10,13 @@ import './categories.page.scss';
 
 function CategoriesPage() {
 	const navigate = useNavigate();
+	const { categories, errors } = useAppSelector(getCategory);
 
 	const goToCategory = (name: string) => {
 		navigate(`${PATHS.CATEGORY}/${name}`);
 	};
+
+	if (errors) return <h2>{errors}</h2>;
 
 	return (
 		<div className="categories">
@@ -22,24 +26,18 @@ function CategoriesPage() {
 				Please, select category for study.
 			</h3>
 			<div className="categories__cards">
-				{Data.map((section) => {
-					// eslint-disable-next-line @typescript-eslint/no-var-requires,global-require,import/no-dynamic-require
-					const path = require(`../../assets/images/${section.name}/${section.image}`);
-
+				{categories.map((card) => {
 					return (
 						<div
 							className="categories__card"
-							key={section.name}
-							onClick={() => goToCategory(section.name)}
+							key={card.name}
+							onClick={() => goToCategory(card.name)}
 							aria-hidden="true">
-							<TitleCardComponent
-								nameEN={section.name}
-								nameRU={section.nameRU}
-							/>
+							<TitleCardComponent nameEN={card.name} nameRU={card.nameRU} />
 							<img
 								className="categories__card-image"
-								src={path}
-								alt={section.name}
+								src={`./assets/images/${card.name}/${card.image}`}
+								alt={card.name}
 							/>
 						</div>
 					);

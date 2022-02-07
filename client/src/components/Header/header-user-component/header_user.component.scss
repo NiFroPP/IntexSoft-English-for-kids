@@ -12,6 +12,12 @@
     color: $second-text;
     padding-bottom: 15px;
     text-align: center;
+    transition: all 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
   }
 
   &__user-btn {
