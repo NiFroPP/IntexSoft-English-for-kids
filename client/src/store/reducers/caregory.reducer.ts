@@ -1,8 +1,10 @@
 import { CategoryWithoutCards } from '../../models/response/categoriesWithoutCards.model';
+import { Card } from '../../pages/Category/category.page';
 
 export interface CategoryActionCreationArguments {
 	isLoading?: boolean;
 	categories?: CategoryWithoutCards[];
+	cards?: Card[];
 	errors?: null | string;
 }
 
@@ -11,12 +13,14 @@ export const SET_DATA = '[category-reducer] SET_DATA';
 export interface Category {
 	isLoading: boolean;
 	categories: CategoryWithoutCards[];
+	cards: Card[];
 	errors: null | string;
 }
 
 const initialStore: Category = {
 	isLoading: false,
 	categories: [],
+	cards: [],
 	errors: null
 };
 

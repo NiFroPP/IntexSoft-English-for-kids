@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 import TitleCardComponent from '../../../components/common/Title-Card/titleCard.component';
+import { Card } from '../category.page';
 
-function CategoryCardComponent({ imgPath, soundPath }: any) {
-	const [audio] = useState(new Audio(soundPath));
+function CategoryCardComponent({ name, nameRU, sound, image }: Card) {
+	const [audio] = useState(new Audio(sound));
 
 	const playSound = () => {
 		audio.play();
@@ -11,8 +12,8 @@ function CategoryCardComponent({ imgPath, soundPath }: any) {
 
 	return (
 		<div className="category__card" onClick={playSound} aria-hidden="true">
-			<img className="category__card-image" src={imgPath} alt="" />
-			<TitleCardComponent nameEN="fox" nameRU="лиса" />
+			<img className="category__card-image" src={image} alt={name} />
+			<TitleCardComponent nameEN={name} nameRU={nameRU} />
 		</div>
 	);
 }

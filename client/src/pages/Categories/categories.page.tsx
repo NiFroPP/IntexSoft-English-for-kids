@@ -4,18 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useTypeSelector';
 import { getCategory } from '../../store/selectors/index.selector';
 import PATHS from '../../models/enum/paths.enum';
+
 import TitleCardComponent from '../../components/common/Title-Card/titleCard.component';
+import LoadingComponent from '../../components/common/Loading/loading.component';
 
 import './categories.page.scss';
 
 function CategoriesPage() {
 	const navigate = useNavigate();
-	const { categories, errors } = useAppSelector(getCategory);
+	const { categories, isLoading, errors } = useAppSelector(getCategory);
 
 	const goToCategory = (name: string) => {
 		navigate(`${PATHS.CATEGORY}/${name}`);
 	};
 
+	if (isLoading) return <LoadingComponent />;
 	if (errors) return <h2>{errors}</h2>;
 
 	return (
@@ -36,7 +39,7 @@ function CategoriesPage() {
 							<TitleCardComponent nameEN={card.name} nameRU={card.nameRU} />
 							<img
 								className="categories__card-image"
-								src={`./assets/images/${card.name}/${card.image}`}
+								src={card.image}
 								alt={card.name}
 							/>
 						</div>

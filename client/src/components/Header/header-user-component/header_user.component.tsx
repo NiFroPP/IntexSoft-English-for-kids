@@ -21,14 +21,13 @@ function HeaderUserComponent() {
 					username: JSON.parse(user).username
 				})
 			);
-			navigate(PATHS.ABOUT);
+			navigate(PATHS.CATEGORY);
 		}
 	};
 
 	useEffect(() => loading(), [username]);
 
 	const logout = () => {
-		navigate(PATHS.ABOUT);
 		localStorage.removeItem('auth-token');
 		dispatch(setUserDataActionCreation({ username: '', isLogin: false }));
 	};

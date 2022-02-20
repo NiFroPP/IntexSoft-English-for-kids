@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/get/data', CategoryController.getAllData)
 router.get('/get/all', CategoryController.getAllCategoriesWithoutCards)
-router.get('/get/one', CategoryController.getOneCategory)
+router.post('/get/one', CategoryController.getOneCategory)
 router.post('/add', CategoryController.addCategory)
 router.post('/update', CategoryController.updateCategory)
 router.delete('/delete', CategoryController.deleteCategory)

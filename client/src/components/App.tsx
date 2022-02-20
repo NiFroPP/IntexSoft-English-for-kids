@@ -4,7 +4,7 @@ import { useActions } from '../hooks/useActions';
 import MenuComponent from './Menu/menu.component';
 import HeaderComponent from './Header/header.component';
 import FooterComponent from './Footer/footer.component';
-import MainComponent from './Main/main.component';
+import RoutesComponent from './Routes/routes.component';
 
 export default function App() {
 	const { fetchCategories } = useActions();
@@ -18,7 +18,7 @@ export default function App() {
 			<MenuComponent />
 			<div id="page-wrap">
 				<HeaderComponent />
-				<MainComponent />
+				<RoutesComponent />
 				<FooterComponent />
 			</div>
 		</div>

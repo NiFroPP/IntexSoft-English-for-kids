@@ -13,6 +13,7 @@ import CategoryPage from '../../pages/Category/category.page';
 import UserSettingPage from '../../pages/User_Setting/userSetting.page';
 
 import './routes.component.scss';
+import WordsPage from '../../pages/All_Words/words.page';
 
 interface IRoutes {
 	path: string;
@@ -35,6 +36,10 @@ const privateRoutes: IRoutes[] = [
 	{
 		path: PATHS.USER_SETTING,
 		element: <UserSettingPage />
+	},
+	{
+		path: PATHS.WORDS,
+		element: <WordsPage />
 	}
 ];
 
@@ -57,21 +62,23 @@ function RoutesComponent() {
 	const { isLogin } = useAppSelector(getUser);
 
 	return (
-		<div className="wrapper">
-			{isLogin ? (
-				<Routes>
-					{privateRoutes.map(({ path, element }) => (
-						<Route path={path} element={element} key={path} />
-					))}
-				</Routes>
-			) : (
-				<Routes>
-					{guestRoutes.map(({ path, element }) => (
-						<Route path={path} element={element} key={path} />
-					))}
-				</Routes>
-			)}
-		</div>
+		<main className="main">
+			<div className="main__container">
+				{isLogin ? (
+					<Routes>
+						{privateRoutes.map(({ path, element }) => (
+							<Route path={path} element={element} key={path} />
+						))}
+					</Routes>
+				) : (
+					<Routes>
+						{guestRoutes.map(({ path, element }) => (
+							<Route path={path} element={element} key={path} />
+						))}
+					</Routes>
+				)}
+			</div>
+		</main>
 	);
 }
 

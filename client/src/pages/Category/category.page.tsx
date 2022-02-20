@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import './category.page.scss';
-import TitleCardComponent from '../../components/common/Title-Card/titleCard.component';
+import { useActions } from '../../hooks/useActions';
+import { useAppSelector } from '../../hooks/useTypeSelector';
+import { getCategory } from '../../store/selectors/index.selector';
+
 import CategoryCardComponent from './Card/categoryCard.component';
+import LoadingComponent from '../../components/common/Loading/loading.component';
+
+import './category.page.scss';
+
+export interface Card {
+	name: string;
+	nameRU: string;
+	image: string;
+	sound: string;
+}
 
 function CategoryPage() {
 	const params = useParams();
+	const { fetchCategory } = useActions();
+	const { cards, isLoading, errors } = useAppSelector(getCategory);
 
-	// eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
-	const imgPath1 = require(`../../assets/images/animals/01.png`);
-	// eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
-	const soundPath1 = require(`../../assets/audio/animals/01.mp3`);
+	useEffect(() => {
+		fetchCategory({ name: params.id });
+	}, [params.id]);
 
-	// eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
-	const imgPath2 = require(`../../assets/images/animals/02.png`);
-	// eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
-	const soundPath2 = require(`../../assets/audio/animals/02.mp3`);
+	if (isLoading) return <LoadingComponent />;
+	if (errors) return <h2>{errors}</h2>;
 
 	return (
 		<div className="category">
@@ -26,8 +37,9 @@ function CategoryPage() {
 				{`You are in the category ${params.id}.`}
 			</h3>
 			<div className="category__cards">
-				<CategoryCardComponent imgPath={imgPath1} soundPath={soundPath1} />
-				<CategoryCardComponent imgPath={imgPath2} soundPath={soundPath2} />
+				{cards.map((card) => (
+					<CategoryCardComponent key={card.name} {...card} />
+				))}
 			</div>
 		</div>
 	);

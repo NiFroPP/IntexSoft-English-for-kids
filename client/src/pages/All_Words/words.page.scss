@@ -1,0 +1,22 @@
+@import "src/assets/styles/variables";
+
+.words-page {
+  width: 100%;
+
+  &__card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 0;
+    border: 1px solid $header-background;
+
+    &-title {
+      font-weight: bold;
+    }
+
+    & div {
+      padding: 5px;
+      width: 33.3%;
+    }
+  }
+}

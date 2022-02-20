@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/useTypeSelector';
 import { getCategory } from '../../store/selectors/index.selector';
+import PATHS from '../../models/enum/paths.enum';
 
 import './menu.component.scss';
 
@@ -22,17 +23,22 @@ function MenuComponent() {
 			onStateChange={(state: {
 				isOpen: boolean | ((prevState: boolean) => boolean);
 			}) => setIsOpen(state.isOpen)}>
-			<Link to="/category" onClick={openHandler}>
+			<Link to={PATHS.CATEGORY} onClick={openHandler}>
 				CATEGORIES
 			</Link>
 			{categories.map((card) => (
 				<Link
-					to={`/category/${card.name}`}
+					className="menu-category"
+					to={`${PATHS.CATEGORY}/${card.name}`}
 					onClick={openHandler}
 					key={card.name}>
 					{card.name}
 				</Link>
 			))}
+			<hr />
+			<Link to={PATHS.WORDS} onClick={openHandler}>
+				ALL WORDS
+			</Link>
 		</Menu>
 	);
 }
