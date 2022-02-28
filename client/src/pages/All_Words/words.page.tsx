@@ -1,26 +1,15 @@
 import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 
+import { useActions } from '../../hooks/useActions';
+import { useAppSelector } from '../../hooks/useTypeSelector';
+import { getCategory } from '../../store/selectors/index.selector';
 import MySelectComponent, {
 	SelectOptions
 } from '../../components/common/MySelect/MySelect.component';
 
 import './words.page.scss';
 
-interface Data {
-	id: number;
-	name: string;
-	nameRU: string;
-	category: string;
-}
-
 function WordsPage() {
-	const data: Data[] = [
-		{ id: 1, name: 'b', nameRU: 'а', category: '2' },
-		{ id: 2, name: 'a', nameRU: 'ы', category: '3' },
-		{ id: 3, name: 'c', nameRU: 'я', category: '1' },
-		{ id: 4, name: 'd', nameRU: 'пц', category: '1' }
-	];
-
 	const options: SelectOptions[] = [
 		{
 			value: 'name',
@@ -37,16 +26,17 @@ function WordsPage() {
 	];
 
 	const [sortType, setSortType] = useState('name');
-	const [words, setWords] = useState(data);
 	const [searchQuery, setSearchQuery] = useState('');
+	const { fetchAllWords } = useActions();
+	const { words } = useAppSelector(getCategory);
 
 	useEffect(() => {
-		setWords(words);
+		fetchAllWords();
 	}, []);
 
 	const sortedWords = useMemo(
 		() =>
-			[...data].sort((a: any, b: any) =>
+			[...words].sort((a: any, b: any) =>
 				a[sortType].localeCompare(b[sortType])
 			),
 		[sortType, words]
@@ -89,7 +79,7 @@ function WordsPage() {
 			</div>
 
 			{sortedAndSearchedWords.map((word, index) => (
-				<div className="words-page__card" key={word.id}>
+				<div className="words-page__card" key={word.nameRU}>
 					<div className="words-page__card-en">
 						{index + 1}. {word.name}
 					</div>

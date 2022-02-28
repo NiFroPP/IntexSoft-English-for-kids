@@ -1,4 +1,4 @@
-export interface OneCard {
+export interface OneCardDto {
 	_id: string;
 	name: string;
 	nameRU: string;
@@ -6,10 +6,10 @@ export interface OneCard {
 	sound: string;
 }
 
-export interface OneCategory {
+export interface OneCategoryDto {
 	_id: string;
 	name: string;
 	nameRU: string;
 	image: string;
-	cards: OneCard[];
+	cards: OneCardDto[];
 }

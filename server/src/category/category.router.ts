@@ -1,10 +1,11 @@
 import { Router } from 'express'
-import CategoryController from '../controllers/category.controller'
+import CategoryController from './category.controller'
 
 const router = Router()
 
 router.get('/get/data', CategoryController.getAllData)
 router.get('/get/all', CategoryController.getAllCategoriesWithoutCards)
+router.get('/get/words', CategoryController.getAllWords)
 router.post('/get/one', CategoryController.getOneCategory)
 router.post('/add', CategoryController.addCategory)
 router.post('/update', CategoryController.updateCategory)

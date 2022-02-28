@@ -39,3 +39,19 @@ export const fetchCategory = (name: CategoryRequest) => {
 		}
 	};
 };
+
+export const fetchAllWords = () => {
+	return async (dispatch: Dispatch<CategoryActionType>): Promise<void> => {
+		try {
+			dispatch(setCategoryDataActionCreation({ isLoading: true }));
+			const response = await allEndpoints.category.getAllWords();
+			dispatch(setCategoryDataActionCreation({ words: response }));
+		} catch (e) {
+			dispatch(
+				setCategoryDataActionCreation({ errors: 'Error while loading' })
+			);
+		} finally {
+			dispatch(setCategoryDataActionCreation({ isLoading: false }));
+		}
+	};
+};

@@ -1,5 +1,5 @@
 import { Model } from 'mongoose'
-import CategoryModel, { Category } from '../models/category.model'
+import CategoryModel, { Category } from './category.model'
 import CustomErrors from '../errors/API.error'
 
 class CategoryService {
@@ -17,6 +17,13 @@ class CategoryService {
 
   async getAllData() {
     return this.model.find()
+  }
+
+  async getAllWords() {
+    return this.model.find(
+      {},
+      { name: 1, nameRU: 1, cards: { name: 1, nameRU: 1 } }
+    )
   }
 
   async getAllCategoriesWithoutCards() {

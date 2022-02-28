@@ -2,7 +2,7 @@ import mongoose, { Model } from 'mongoose'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import config from '../config'
-import UserModel, { User } from '../models/user.model'
+import UserModel, { User } from './user.model'
 import CustomErrors from '../errors/API.error'
 
 class UserService {

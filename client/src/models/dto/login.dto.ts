@@ -1,4 +1,4 @@
-export interface LoginResponse {
+export interface LoginDto {
 	token: string;
 	username: string;
 }

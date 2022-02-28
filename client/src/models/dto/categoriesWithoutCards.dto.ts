@@ -1,4 +1,4 @@
-export interface CategoryWithoutCards {
+export interface CategoryWithoutCardsDto {
 	_id: string;
 	name: string;
 	nameRU: string;
