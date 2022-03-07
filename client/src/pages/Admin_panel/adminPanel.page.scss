@@ -1,0 +1,66 @@
+@import "src/assets/styles/variables";
+
+.admin-panel-page {
+  &__field {
+    min-width: 300px;
+    border: 1px solid $main-text;
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.5s;
+
+    &:hover {
+      box-shadow: 0 0 20px rgb(33 33 33 / 80%);
+    }
+  }
+
+  &__title {
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+    border-bottom: 1px solid #1a1a1a;
+
+  }
+
+  &__section {
+    padding: 10px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #1a1a1a;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+
+    & input {
+      width: 75px;
+      transition: all 0.5s;
+
+      &:hover {
+        box-shadow: 0 0 20px rgb(33 33 33 / 80%);
+      }
+    }
+  }
+
+  &__go-to-admin-panel,
+  &__go-to-change {
+    color: $main-text;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__go-to-admin-panel {
+    font-size: 12px;
+  }
+
+  &__go-to-change {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+  }
+}

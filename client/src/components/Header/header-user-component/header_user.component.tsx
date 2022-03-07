@@ -33,7 +33,7 @@ function HeaderUserComponent() {
 	};
 
 	const goToSettingPage = () => {
-		navigate(PATHS.USER_SETTING);
+		navigate(PATHS.ADMIN_PANEL);
 	};
 
 	return (
