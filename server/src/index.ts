@@ -5,6 +5,7 @@ import config from './config'
 import userRouter from './user/user.router'
 import categoryRouter from './category/category.router'
 import { errorMiddleware } from './middlewares/error.middleware'
+import { authMiddleware } from './middlewares/auth.middleware'
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(
 app.use(cors())
 app.use('/users', userRouter)
 app.use('/categories', categoryRouter)
+app.use(authMiddleware)
 app.use(errorMiddleware)
 
 const start = async (): Promise<void> => {

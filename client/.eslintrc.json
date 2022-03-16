@@ -12,15 +12,8 @@
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-//  "parserOptions": {
-//    "ecmaFeatures": {
-//      "jsx": true
-//    },
-//    "ecmaVersion": 12,
-//    "sourceType": "module"
-//  },
   "plugins": ["react", "react-redux", "@typescript-eslint", "prettier"],
-  "ignorePatterns": ["dist/", "node_modules/"],
+  "ignorePatterns": ["dist/", "node_modules/", "build/"],
   "rules": {
     "prettier/prettier": ["off", { "singleQuote": true }],
     "max-len": [1, 100, 2, { "ignoreComments": true }],
@@ -31,23 +24,12 @@
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": 0,
     "react/require-default-props": "off",
-//    "no-shadow": "off",
-//    "@typescript-eslint/no-shadow": ["error"],
     "import/no-unresolved": "off",
     "import/extensions": "off",
-//    "react/jsx-props-no-spreading": "off",
-//    "jsx-a11y/label-has-associated-control": "off",
     "default-param-last": "off",
     "@typescript-eslint/default-param-last": "off",
     "no-param-reassign": ["error", { "props": false }],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["off"]
   }
-//  "settings": {
-//    "import/resolver": {
-//      "node": {
-//        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-//      }
-//    }
-//  }
 }

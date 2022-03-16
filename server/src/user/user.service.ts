@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken'
 import config from '../config'
 import UserModel, { User } from './user.model'
 import CustomErrors from '../errors/API.error'
+import { LoginResponseDto } from './dto/login.response.dto'
+import { RegistrationResponseDto } from './dto/registration.response.dto'
 
 class UserService {
   constructor(private model: Model<User>) {
@@ -14,7 +16,7 @@ class UserService {
     email: string,
     password: string,
     username: string
-  ): Promise<User> {
+  ): Promise<RegistrationResponseDto> {
     const candidate = await this.model.findOne({ email })
     if (candidate) {
       throw CustomErrors.badRequestError(
@@ -25,17 +27,15 @@ class UserService {
     const salt = await bcrypt.genSalt(+config.salt)
     const hashPassword = await bcrypt.hash(password, salt)
 
-    const user = await this.model.create({
+    return this.model.create({
       _id: new mongoose.Types.ObjectId(),
       email,
       password: hashPassword,
       username,
     })
-
-    return user
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<LoginResponseDto> {
     const user = await this.model.findOne({ email })
     if (!user) {
       throw CustomErrors.badRequestError(`User with email: ${email} not exist`)
@@ -52,10 +52,6 @@ class UserService {
       }),
       username: user.username,
     }
-  }
-
-  async getAllUsers() {
-    return this.model.find()
   }
 }
 
