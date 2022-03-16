@@ -4,22 +4,20 @@ import allEndpoints from '../../api';
 import { CategoryRequest } from '../../api/endpoints/category.endpoint';
 import {
 	CategoryActionType,
-	setCategoryDataActionCreation
-} from '../reducers/caregory.reducer';
+	setCategoryData
+} from '../reducers/category.reducer';
 
 export const fetchCategories = () => {
 	return async (dispatch: Dispatch<CategoryActionType>): Promise<void> => {
 		try {
-			dispatch(setCategoryDataActionCreation({ isLoading: true }));
+			dispatch(setCategoryData({ isLoading: true }));
 			const response =
 				await allEndpoints.category.getAllCategoriesWithoutCards();
-			dispatch(setCategoryDataActionCreation({ categories: response }));
+			dispatch(setCategoryData({ categories: response }));
 		} catch (e) {
-			dispatch(
-				setCategoryDataActionCreation({ errors: 'Error while loading' })
-			);
+			dispatch(setCategoryData({ errors: 'Error while loading' }));
 		} finally {
-			dispatch(setCategoryDataActionCreation({ isLoading: false }));
+			dispatch(setCategoryData({ isLoading: false }));
 		}
 	};
 };
@@ -27,15 +25,13 @@ export const fetchCategories = () => {
 export const fetchCategory = (name: CategoryRequest) => {
 	return async (dispatch: Dispatch<CategoryActionType>): Promise<void> => {
 		try {
-			dispatch(setCategoryDataActionCreation({ isLoading: true }));
+			dispatch(setCategoryData({ isLoading: true }));
 			const response = await allEndpoints.category.getOneCategory(name);
-			dispatch(setCategoryDataActionCreation({ cards: response.cards }));
+			dispatch(setCategoryData({ cards: response.cards }));
 		} catch (e) {
-			dispatch(
-				setCategoryDataActionCreation({ errors: 'Error while loading' })
-			);
+			dispatch(setCategoryData({ errors: 'Error while loading' }));
 		} finally {
-			dispatch(setCategoryDataActionCreation({ isLoading: false }));
+			dispatch(setCategoryData({ isLoading: false }));
 		}
 	};
 };
@@ -43,15 +39,13 @@ export const fetchCategory = (name: CategoryRequest) => {
 export const fetchAllWords = () => {
 	return async (dispatch: Dispatch<CategoryActionType>): Promise<void> => {
 		try {
-			dispatch(setCategoryDataActionCreation({ isLoading: true }));
+			dispatch(setCategoryData({ isLoading: true }));
 			const response = await allEndpoints.category.getAllWords();
-			dispatch(setCategoryDataActionCreation({ words: response }));
+			dispatch(setCategoryData({ words: response }));
 		} catch (e) {
-			dispatch(
-				setCategoryDataActionCreation({ errors: 'Error while loading' })
-			);
+			dispatch(setCategoryData({ errors: 'Error while loading' }));
 		} finally {
-			dispatch(setCategoryDataActionCreation({ isLoading: false }));
+			dispatch(setCategoryData({ isLoading: false }));
 		}
 	};
 };

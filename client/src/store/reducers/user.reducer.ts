@@ -1,10 +1,6 @@
-export interface ActionCreationArguments {
-	isLogin?: boolean;
-	username?: string;
-}
-
 export const SET_DATA = '[user-reducer] SET_DATA';
 
+export type UserActionType = ReturnType<typeof setUserData>;
 export interface User {
 	isLogin: boolean;
 	username: string;
@@ -15,19 +11,15 @@ const initialStore: User = {
 	username: ''
 };
 
-type StateType = typeof initialStore;
-
-export const setUserDataActionCreation = (payload: ActionCreationArguments) =>
-	({ type: SET_DATA, payload } as const);
-
-type AC1Type = ReturnType<typeof setUserDataActionCreation>;
-
-export type ActionType = AC1Type;
+export const setUserData = (payload: Partial<User>) => ({
+	type: SET_DATA,
+	payload
+});
 
 const userReducer = (
-	state: StateType = initialStore,
-	{ type, payload }: ActionType
-): StateType => {
+	state: User = initialStore,
+	{ type, payload }: UserActionType
+): User => {
 	switch (type) {
 		case SET_DATA: {
 			return { ...state, ...payload };

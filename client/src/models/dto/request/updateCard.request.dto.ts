@@ -1,7 +1,5 @@
 export interface UpdateCardRequestDto {
-	name: string;
-	cardName: string;
-	cards: {
+	updCard: {
 		name: string;
 		nameRU: string;
 		image: string;

@@ -40,14 +40,12 @@ class CategoryService {
       throw CustomErrors.badRequestError(`Category '${name}' already exist`)
     }
 
-    const newCategory = await this.model.create({
+    return this.model.create({
       name,
       nameRU,
       image,
       cards: [],
     })
-
-    return newCategory
   }
 
   async updateCategory(
@@ -57,12 +55,11 @@ class CategoryService {
     updImage: string
   ) {
     await this.isCandidateExist(name)
-    const updCategory = await this.model.updateOne(
+
+    return this.model.updateOne(
       { name },
       { $set: { name: updName, nameRU: updNameRU, image: updImage } }
     )
-
-    return updCategory
   }
 
   async deleteCategory(name: string) {
@@ -87,11 +84,11 @@ class CategoryService {
     )
   }
 
-  async updateCard(name: string, cardName: string, updCard: any) {
+  async updateCard(name: string, word: string, updCard: any) {
     await this.isCandidateExist(name)
 
     await this.model.updateOne(
-      { name, cards: { $elemMatch: { name: cardName } } },
+      { name, cards: { $elemMatch: { name: word } } },
       {
         $set: {
           'cards.$.name': updCard.name,
@@ -103,12 +100,12 @@ class CategoryService {
     )
   }
 
-  async deleteCard(name: string, cards: any) {
+  async deleteCard(name: string, word: string) {
     await this.isCandidateExist(name)
     await this.model.updateOne(
       { name },
       {
-        $pull: { cards: { name: cards.name } },
+        $pull: { cards: { name: word } },
       }
     )
   }

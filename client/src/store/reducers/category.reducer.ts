@@ -2,16 +2,9 @@ import { AllWordsDto } from 'models/dto/allWords.dto';
 import { CategoryWithoutCardsDto } from 'models/dto/categoriesWithoutCards.dto';
 import { Card } from '../../pages/Category/category.page';
 
-export interface CategoryActionCreationArguments {
-	isLoading?: boolean;
-	categories?: CategoryWithoutCardsDto[];
-	cards?: Card[];
-	errors?: null | string;
-	words?: AllWordsDto[];
-}
-
 export const SET_DATA = '[category-reducer] SET_DATA';
 
+export type CategoryActionType = ReturnType<typeof setCategoryData>;
 export interface Category {
 	isLoading: boolean;
 	categories: CategoryWithoutCardsDto[];
@@ -28,12 +21,15 @@ const initialStore: Category = {
 	words: []
 };
 
-type StateType = typeof initialStore;
+export const setCategoryData = (payload: Partial<Category>) => ({
+	type: SET_DATA,
+	payload
+});
 
 const categoryReducer = (
-	state: StateType = initialStore,
+	state: Category = initialStore,
 	{ type, payload }: CategoryActionType
-): StateType => {
+): Category => {
 	switch (type) {
 		case SET_DATA: {
 			return { ...state, ...payload };
@@ -42,13 +38,5 @@ const categoryReducer = (
 			return state;
 	}
 };
-
-export const setCategoryDataActionCreation = (
-	payload: CategoryActionCreationArguments
-) => ({ type: SET_DATA, payload } as const);
-
-export type CategoryActionType = ReturnType<
-	typeof setCategoryDataActionCreation
->;
 
 export default categoryReducer;

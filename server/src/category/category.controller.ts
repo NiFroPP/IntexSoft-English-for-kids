@@ -11,7 +11,8 @@ const CategoryController = {
   }),
 
   updateCategory: wrapTryCatch(async (req: Request, res: Response) => {
-    const { name, updName, updNameRU, updImage } = req.body
+    const { name } = req.params
+    const { updName, updNameRU, updImage } = req.body
     const updCategory = await CategoryService.updateCategory(
       name,
       updName,
@@ -23,14 +24,15 @@ const CategoryController = {
   }),
 
   deleteCategory: wrapTryCatch(async (req: Request, res: Response) => {
-    const { name } = req.body
+    const { name } = req.params
     await CategoryService.deleteCategory(name)
 
     res.json({ message: `Category '${name}' was deleted` })
   }),
 
   addCard: wrapTryCatch(async (req: Request, res: Response) => {
-    const { name, cards } = req.body
+    const { name } = req.params
+    const { cards } = req.body
     await CategoryService.addCard(name, cards)
 
     res.status(201).json({
@@ -39,20 +41,21 @@ const CategoryController = {
   }),
 
   updateCard: wrapTryCatch(async (req: Request, res: Response) => {
-    const { name, cardName, updCard } = req.body
-    await CategoryService.updateCard(name, cardName, updCard)
+    const { name, word } = req.params
+    const { updCard } = req.body
+    await CategoryService.updateCard(name, word, updCard)
 
     res.json({
-      message: `Card '${cardName}' from category '${name}' was changed`,
+      message: `Card '${word}' from category '${name}' was changed`,
     })
   }),
 
   deleteCard: wrapTryCatch(async (req: Request, res: Response) => {
-    const { name, cards } = req.body
-    await CategoryService.deleteCard(name, cards)
+    const { name, word } = req.params
+    await CategoryService.deleteCard(name, word)
 
     res.json({
-      message: `Card '${cards.name}' in category '${name}' was deleted`,
+      message: `Card '${word}' in category '${name}' was deleted`,
     })
   }),
 
@@ -65,7 +68,7 @@ const CategoryController = {
   ),
 
   getOneCategory: wrapTryCatch(async (req: Request, res: Response) => {
-    const { name } = req.body
+    const { name } = req.params
     const category = await CategoryService.getOneCategory(name)
 
     res.json(category)

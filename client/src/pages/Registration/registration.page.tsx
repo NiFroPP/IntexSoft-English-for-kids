@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	FieldErrors,
 	Path,
@@ -46,6 +46,7 @@ function Input({ label, register, required, errors }: InputProps) {
 
 function RegistrationPage() {
 	const navigate = useNavigate();
+	const [responseErr, setResponseErr] = useState('');
 
 	const {
 		register,
@@ -54,8 +55,12 @@ function RegistrationPage() {
 	} = useForm<IRegistration>({ resolver: yupResolver(schema) });
 
 	const onSubmit: SubmitHandler<IRegistration> = async (data) => {
-		await allEndpoints.auth.registration(data);
-		navigate(PATHS.LOGIN);
+		const response = await allEndpoints.auth.registration(data);
+		if (response.error) {
+			setResponseErr(response.data.message);
+		} else {
+			navigate(PATHS.LOGIN);
+		}
 	};
 
 	return (
@@ -73,6 +78,9 @@ function RegistrationPage() {
 					<input type="submit" />
 				</div>
 			</form>
+			{responseErr ? (
+				<h2 className="registration-page__error">{responseErr}</h2>
+			) : null}
 		</div>
 	);
 }

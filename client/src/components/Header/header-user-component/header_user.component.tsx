@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/useTypeSelector';
-import { setUserDataActionCreation } from '../../../store/reducers/user.reducer';
+import { setUserData } from '../../../store/reducers/user.reducer';
 import PATHS from '../../../models/enum/paths.enum';
 
 import './header_user.component.scss';
@@ -16,7 +16,7 @@ function HeaderUserComponent() {
 		const user = localStorage.getItem('auth-token');
 		if (user) {
 			dispatch(
-				setUserDataActionCreation({
+				setUserData({
 					isLogin: true,
 					username: JSON.parse(user).username
 				})
@@ -29,7 +29,7 @@ function HeaderUserComponent() {
 
 	const logout = () => {
 		localStorage.removeItem('auth-token');
-		dispatch(setUserDataActionCreation({ username: '', isLogin: false }));
+		dispatch(setUserData({ username: '', isLogin: false }));
 	};
 
 	const goToSettingPage = () => {

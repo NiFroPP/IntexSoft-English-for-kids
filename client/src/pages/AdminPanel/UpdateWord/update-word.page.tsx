@@ -3,27 +3,28 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
-import schema from './createWord.validation';
+import schema from './update-word.validarion';
 import allEndpoints from '../../../api';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import { getSoundAsString } from '../../../utils/getSoundAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
-import { CreateWordRequestDto } from '../../../models/dto/request/createWord.request.dto';
+import { UpdateCardRequestDto } from '../../../models/dto/request/updateCard.request.dto';
 
 import MyInputComponent from '../../../components/common/MyInput/MyInput.component';
 import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/SubmitBtn.component';
 
-import '../adminPanel.page.scss';
+import '../admin-panel.page.scss';
 
 type Inputs = {
-	'category for adding word': string;
-	'word in English': string;
-	'word in Russian': string;
+	'category for updating': string;
+	'word for updating': string;
+	'new word in English': string;
+	'new word in Russian': string;
 	image: string;
 	sound: string;
 };
 
-function CreateWordPage() {
+function UpdateWordPage() {
 	const navigate = useNavigate();
 	const {
 		register,
@@ -35,40 +36,49 @@ function CreateWordPage() {
 		const compressedImageFileAsString = await getCompressedImageAsString(data);
 		const soundFileAsString = await getSoundAsString(data);
 
-		const requestData: CreateWordRequestDto = {
-			name: data['category for adding word'],
-			cards: {
-				name: data['word in English'],
-				nameRU: data['word in Russian'],
+		const name = data['category for updating'];
+		const cardName = data['word for updating'];
+
+		const requestData: UpdateCardRequestDto = {
+			updCard: {
+				name: data['new word in English'],
+				nameRU: data['new word in Russian'],
 				image: compressedImageFileAsString,
 				sound: soundFileAsString
 			}
 		};
-		await allEndpoints.adminPanel.createCard(requestData);
+
+		await allEndpoints.adminPanel.updateCard(name, cardName, requestData);
 		navigate(PATHS.ADMIN_PANEL);
 	};
 
 	return (
 		<div className="admin-panel-page__field">
-			<h2 className="admin-panel-page__title">Create word:</h2>
+			<h2 className="admin-panel-page__title">Update word:</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<MyInputComponent
-					label="category for adding word"
+					label="category for updating"
 					register={register}
 					errors={errors}
 					placeholder="category name"
 				/>
 				<MyInputComponent
-					label="word in English"
+					label="word for updating"
 					register={register}
 					errors={errors}
-					placeholder="add word in English"
+					placeholder="word name"
 				/>
 				<MyInputComponent
-					label="word in Russian"
+					label="new word in English"
 					register={register}
 					errors={errors}
-					placeholder="add word in Russian"
+					placeholder="new eng name"
+				/>
+				<MyInputComponent
+					label="new word in Russian"
+					register={register}
+					errors={errors}
+					placeholder="new rus name"
 				/>
 				<MyInputComponent
 					label="image"
@@ -90,4 +100,4 @@ function CreateWordPage() {
 	);
 }
 
-export default CreateWordPage;
+export default UpdateWordPage;

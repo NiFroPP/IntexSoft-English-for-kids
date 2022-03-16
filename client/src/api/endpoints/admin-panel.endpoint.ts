@@ -23,10 +23,11 @@ const adminPanelEndpoints = {
 	},
 
 	async updateCategory(
+		name: string,
 		data: UpdateCategoryRequestDto
 	): Promise<UpdateCategoryResponseDto> {
-		const response = await axios.post<UpdateCategoryResponseDto>(
-			REQUEST_PATH.UPDATE_CATEGORY,
+		const response = await axios.patch<UpdateCategoryResponseDto>(
+			`${REQUEST_PATH.UPDATE_CATEGORY}/${name}`,
 			data
 		);
 
@@ -34,25 +35,39 @@ const adminPanelEndpoints = {
 	},
 
 	async deleteCategory(data: DeleteCategoryRequestDto): Promise<void> {
-		const response = await axios.post<void>(REQUEST_PATH.DELETE_CATEGORY, data);
+		const response = await axios.delete<void>(
+			`${REQUEST_PATH.DELETE_CATEGORY}/${data.name}`
+		);
 
 		return response.data;
 	},
 
-	async createCard(data: CreateWordRequestDto) {
-		const response = await axios.post(REQUEST_PATH.CREATE_CARD, data);
+	async createCard(name: string, data: CreateWordRequestDto) {
+		const response = await axios.post(
+			`${REQUEST_PATH.CREATE_CARD}/${name}`,
+			data
+		);
 
 		return response.data;
 	},
 
-	async updateCard(data: UpdateCardRequestDto): Promise<void> {
-		const response = await axios.post<void>(REQUEST_PATH.UPDATE_CARD, data);
+	async updateCard(
+		name: string,
+		cardName: string,
+		data: UpdateCardRequestDto
+	): Promise<void> {
+		const response = await axios.patch<void>(
+			`${REQUEST_PATH.UPDATE_CARD}/${name}/${cardName}`,
+			data
+		);
 
 		return response.data;
 	},
 
 	async deleteCard(data: DeleteCardRequestDto): Promise<void> {
-		const response = await axios.post<void>(REQUEST_PATH.DELETE_CARD, data);
+		const response = await axios.delete<void>(
+			`${REQUEST_PATH.DELETE_CARD}/${data.name}/${data.cards.name}`
+		);
 
 		return response.data;
 	}

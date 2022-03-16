@@ -3,24 +3,25 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
-import schema from './createCategory.validation';
+import schema from './update-category.validation';
 import allEndpoints from '../../../api';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
-import { CreateCategoryRequestDto } from '../../../models/dto/request/createCategory.request.dto';
+import { UpdateCategoryRequestDto } from '../../../models/dto/request/updateCategory.request.dto';
 
 import MyInputComponent from '../../../components/common/MyInput/MyInput.component';
 import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/SubmitBtn.component';
 
-import '../adminPanel.page.scss';
+import '../admin-panel.page.scss';
 
 type Inputs = {
-	category: string;
-	'category in Russian': string;
+	'category for update': string;
+	'new category name': string;
+	'new category name in Russian': string;
 	image: string;
 };
 
-function CreateCategoryPage() {
+function UpdateCategoryPage() {
 	const navigate = useNavigate();
 	const {
 		register,
@@ -30,32 +31,39 @@ function CreateCategoryPage() {
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		const compressedImageFileAsString = await getCompressedImageAsString(data);
+		const name = data['category for update'];
 
-		const requestData: CreateCategoryRequestDto = {
-			name: data.category,
-			nameRU: data['category in Russian'],
-			image: compressedImageFileAsString
+		const requestData: UpdateCategoryRequestDto = {
+			updName: data['new category name'],
+			updNameRU: data['new category name in Russian'],
+			updImage: compressedImageFileAsString
 		};
 
-		await allEndpoints.adminPanel.createCategory(requestData);
+		await allEndpoints.adminPanel.updateCategory(name, requestData);
 		navigate(PATHS.ADMIN_PANEL);
 	};
 
 	return (
 		<div className="admin-panel-page__field">
-			<h2 className="admin-panel-page__title">Create category:</h2>
+			<h2 className="admin-panel-page__title">Update category:</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<MyInputComponent
-					label="category"
+					label="category for update"
 					register={register}
 					errors={errors}
-					placeholder="add category"
+					placeholder="name"
 				/>
 				<MyInputComponent
-					label="category in Russian"
+					label="new category name"
 					register={register}
 					errors={errors}
-					placeholder="add category in Russian"
+					placeholder="new name"
+				/>
+				<MyInputComponent
+					label="new category name in Russian"
+					register={register}
+					errors={errors}
+					placeholder="new rus name"
 				/>
 				<MyInputComponent
 					label="image"
@@ -70,4 +78,4 @@ function CreateCategoryPage() {
 	);
 }
 
-export default CreateCategoryPage;
+export default UpdateCategoryPage;

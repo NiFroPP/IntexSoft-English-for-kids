@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
-import schema from './deleteCategory.validation';
+import schema from './delete-category.validation';
 import allEndpoints from '../../../api';
 import PATHS from '../../../models/enum/paths.enum';
 import { DeleteCategoryRequestDto } from '../../../models/dto/request/deleteCategory.request.dto';
@@ -11,7 +11,7 @@ import { DeleteCategoryRequestDto } from '../../../models/dto/request/deleteCate
 import MyInputComponent from '../../../components/common/MyInput/MyInput.component';
 import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/SubmitBtn.component';
 
-import '../adminPanel.page.scss';
+import '../admin-panel.page.scss';
 
 type Inputs = {
 	'category to delete': string;

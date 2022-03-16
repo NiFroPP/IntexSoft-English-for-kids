@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	useForm,
 	SubmitHandler,
@@ -12,7 +12,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import schema from './validation';
 import allEndpoints from '../../api';
 import { useAppDispatch } from '../../hooks/useTypeSelector';
-import { setUserDataActionCreation } from '../../store/reducers/user.reducer';
+import { setUserData } from '../../store/reducers/user.reducer';
 import PATHS from '../../models/enum/paths.enum';
 
 import './login.page.scss';
@@ -46,6 +46,7 @@ function Input({ label, register, required, errors }: InputProps) {
 function LoginPage() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const [responseErr, setResponseErr] = useState('');
 
 	const {
 		register,
@@ -55,9 +56,14 @@ function LoginPage() {
 
 	const onSubmit: SubmitHandler<ILogin> = async (data) => {
 		const response = await allEndpoints.auth.login(data);
-		localStorage.setItem('auth-token', JSON.stringify(response.data));
-		dispatch(setUserDataActionCreation({ username: response.data.username }));
-		navigate(PATHS.ABOUT);
+
+		if (response.error) {
+			setResponseErr(response.data.message);
+		} else {
+			localStorage.setItem('auth-token', JSON.stringify(response.data));
+			dispatch(setUserData({ username: response.data.username }));
+			navigate(PATHS.ABOUT);
+		}
 	};
 
 	return (
@@ -72,6 +78,9 @@ function LoginPage() {
 					<input type="submit" />
 				</div>
 			</form>
+			{responseErr ? (
+				<h2 className="login-page__error">{responseErr}</h2>
+			) : null}
 		</div>
 	);
 }

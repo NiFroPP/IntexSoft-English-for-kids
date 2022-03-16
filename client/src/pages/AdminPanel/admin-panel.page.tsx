@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import PATHS from '../../models/enum/paths.enum';
 
-import './adminPanel.page.scss';
+import './admin-panel.page.scss';
 
 function AdminPanelPage() {
 	return (

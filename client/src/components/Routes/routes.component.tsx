@@ -10,14 +10,14 @@ import RegistrationPage from '../../pages/Registration/registration.page';
 import AboutPage from '../../pages/About/about.page';
 import CategoriesPage from '../../pages/Categories/categories.page';
 import CategoryPage from '../../pages/Category/category.page';
-import AdminPanelPage from '../../pages/Admin_panel/adminPanel.page';
-import CreateCategoryPage from '../../pages/Admin_panel/Create_category/createCategory.page';
-import UpdateCategoryPage from '../../pages/Admin_panel/Update_category/updateCategory.page';
-import DeleteCategoryPage from '../../pages/Admin_panel/Delete_category/deleteCategory.page';
-import CreateWordPage from '../../pages/Admin_panel/Create_word/createWord.page';
-import UpdateWordPage from '../../pages/Admin_panel/Update_word/updateWord.page';
-import DeleteWordPage from '../../pages/Admin_panel/Delete_word/deleteWord.page';
-import WordsPage from '../../pages/All_Words/words.page';
+import AdminPanelPage from '../../pages/AdminPanel/admin-panel.page';
+import CreateCategoryPage from '../../pages/AdminPanel/CreateCategory/create-category.page';
+import UpdateCategoryPage from '../../pages/AdminPanel/UpdateCategory/update-category.page';
+import DeleteCategoryPage from '../../pages/AdminPanel/DeleteCategory/delete-category.page';
+import CreateWordPage from '../../pages/AdminPanel/CreateWord/create-word.page';
+import UpdateWordPage from '../../pages/AdminPanel/UpdateWord/update-word.page';
+import DeleteWordPage from '../../pages/AdminPanel/DeleteWord/delete-word.page';
+import WordsPage from '../../pages/AllWords/words.page';
 
 import './routes.component.scss';
 

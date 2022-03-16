@@ -25,9 +25,8 @@ const categoryEndpoints = {
 	},
 
 	async getOneCategory(data: CategoryRequest): Promise<OneCategoryDto> {
-		const response = await axios.post<OneCategoryDto>(
-			REQUEST_PATH.GET_ONE_CATEGORY,
-			data
+		const response = await axios.get<OneCategoryDto>(
+			`${REQUEST_PATH.GET_ONE_CATEGORY}/${data.name}`
 		);
 
 		return response.data;

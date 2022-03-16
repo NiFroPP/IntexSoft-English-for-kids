@@ -5,7 +5,7 @@ import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useTypeSelector';
 import { getCategory } from '../../store/selectors/index.selector';
 
-import CategoryCardComponent from './Card/categoryCard.component';
+import CategoryCardComponent from './Card/category-card.component';
 import LoadingComponent from '../../components/common/Loading/loading.component';
 
 import './category.page.scss';
