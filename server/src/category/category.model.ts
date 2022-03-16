@@ -1,6 +1,7 @@
-import { Schema, model, Document } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
 export interface Card {
+  _id: Types.ObjectId
   name: string
   nameRU: string
   image: string
@@ -19,7 +20,8 @@ const cardSchema = new Schema<Card>(
   }
 )
 
-export interface Category extends Document {
+export interface Category {
+  _id: Types.ObjectId
   name: string
   nameRU: string
   image: string

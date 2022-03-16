@@ -1,0 +1,533 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "English for kids API.",
+    "description": "This is the documentation for possible requests to the 'English for kids' server.",
+    "contact": {
+      "email": "frolovnick0@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Operations about user."
+    },
+    {
+      "name": "Categories",
+      "description": "Everything about English words to learn."
+    }
+  ],
+  "paths": {
+    "/categories": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get all categories without card",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CategoryWithoutCard"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Add new unique category",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data for add a new unique category",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "nameRU": {
+                  "type": "string",
+                  "example": "тест"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJY"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/categories/words": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get all words",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Word"
+            }
+          }
+        }
+      }
+    },
+    "/categories/{categoryName}": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get category by unique categoryName",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryName",
+            "description": "Search category name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Categories"],
+        "summary": "Update unique category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryName",
+            "description": "Search category name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data to update category",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "updName": {
+                  "type": "string",
+                  "example": "upd name"
+                },
+                "updNameRU": {
+                  "type": "string",
+                  "example": "изм имя"
+                },
+                "updImage": {
+                  "type": "string",
+                  "example": "image"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "summary": "Remove unique category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryName",
+            "description": "Search category name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/categories/cards/{categoryName}": {
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Add new word to category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryName",
+            "description": "Search category name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Add word to category",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cards": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "word"
+                    },
+                    "nameRU": {
+                      "type": "string",
+                      "example": "слово"
+                    },
+                    "image": {
+                      "type": "string",
+                      "example": "image"
+                    },
+                    "sound": {
+                      "type": "string",
+                      "example": "sound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/categories/cards/{categoryName}/{word}": {
+      "patch": {
+        "tags": ["Categories"],
+        "summary": "Update word in category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryName",
+            "description": "Search category name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "word",
+            "description": "Word to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data to change word",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "updCard": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "upd word"
+                    },
+                    "nameRU": {
+                      "type": "string",
+                      "example": "изм слово"
+                    },
+                    "image": {
+                      "type": "string",
+                      "example": "image"
+                    },
+                    "sound": {
+                      "type": "string",
+                      "example": "sound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "summary": "Remove word from category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryName",
+            "description": "Search category name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "word",
+            "description": "Word to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/users/registration": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a new User",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data for registering a new user",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "user@user.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "useruser"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "USER"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Get JWT for User",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data to get JWT",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "user@user.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "useruser"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6250a8945e40a3619486a35e"
+        },
+        "name": {
+          "type": "string",
+          "example": "food"
+        },
+        "nameRU": {
+          "type": "string",
+          "example": "еда"
+        },
+        "image": {
+          "type": "string",
+          "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJY"
+        },
+        "cards": {
+          "type": "object",
+          "$ref": "#/definitions/Card"
+        }
+      }
+    },
+    "CategoryWithoutCard": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6250a8945e40a3619486a35e"
+        },
+        "name": {
+          "type": "string",
+          "example": "food"
+        },
+        "nameRU": {
+          "type": "string",
+          "example": "еда"
+        },
+        "image": {
+          "type": "string",
+          "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJY"
+        }
+      }
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6250a8945e40a3619486a35e"
+        },
+        "name": {
+          "type": "string",
+          "example": "bread"
+        },
+        "nameRU": {
+          "type": "string",
+          "example": "хлеб"
+        },
+        "image": {
+          "type": "string",
+          "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJI"
+        },
+        "sound": {
+          "type": "string",
+          "example": "data:audio/mpeg;base64,SUQzBAAAAABdGFRJVDIAAAAHAAAD"
+        }
+      }
+    },
+    "Word": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6250a8945e40a3619486a35e"
+        },
+        "name": {
+          "type": "string",
+          "example": "bread"
+        },
+        "nameRU": {
+          "type": "string",
+          "example": "хлеб"
+        },
+        "category": {
+          "type": "string",
+          "example": "food"
+        },
+        "categoryRU": {
+          "type": "string",
+          "example": "еда"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find this server code you can my GitHub",
+    "url": "https://github.com/NiFroPP/IntexSoft-English-for-kids"
+  }
+}

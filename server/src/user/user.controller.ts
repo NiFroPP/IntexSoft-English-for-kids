@@ -11,23 +11,15 @@ const UserController = {
       throw CustomErrors.requestValidationError(errors.array())
     }
 
-    const { email, password, username } = req.body
-    const user = await UserService.registration(email, password, username)
+    const user = await UserService.registration(req.body)
 
     res.status(201).json(user)
   }),
 
   login: wrapTryCatch(async (req: Request, res: Response) => {
-    const { email, password } = req.body
-    const user = await UserService.login(email, password)
+    const user = await UserService.login(req.body)
 
     res.json(user)
-  }),
-
-  getAllUsers: wrapTryCatch(async (req: Request, res: Response) => {
-    const users = await UserService.getAllUsers()
-
-    res.json({ users, count: users.length })
   }),
 }
 

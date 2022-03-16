@@ -1,4 +1,4 @@
-import { AllWordsDto } from 'models/dto/allWords.dto';
+import { WordDto } from 'models/dto/word.dto';
 import { CategoryWithoutCardsDto } from 'models/dto/categoriesWithoutCards.dto';
 import { Card } from '../../pages/Category/category.page';
 
@@ -10,7 +10,7 @@ export interface Category {
 	categories: CategoryWithoutCardsDto[];
 	cards: Card[];
 	errors: null | string;
-	words: AllWordsDto[];
+	words: WordDto[];
 }
 
 const initialStore: Category = {

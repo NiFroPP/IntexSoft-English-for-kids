@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/useTypeSelector';
 import { getCategory } from '../../store/selectors/index.selector';
 import MySelectComponent, {
 	SelectOptions
-} from '../../components/common/MySelect/MySelect.component';
+} from '../../components/common/MySelect/my-select.component';
 
 import './words.page.scss';
 
@@ -73,13 +73,28 @@ function WordsPage() {
 			/>
 
 			<div className="words-page__card">
-				<div className="words-page__card-title">English / Английский</div>
-				<div className="words-page__card-title">Russian/ Русский</div>
-				<div className="words-page__card-title">Category/ Категория</div>
+				<div
+					className="words-page__card-title"
+					onClick={() => setSortType('name')}
+					aria-hidden="true">
+					English / Английский
+				</div>
+				<div
+					className="words-page__card-title"
+					onClick={() => setSortType('nameRU')}
+					aria-hidden="true">
+					Russian / Русский
+				</div>
+				<div
+					className="words-page__card-title"
+					onClick={() => setSortType('category')}
+					aria-hidden="true">
+					Category / Категория
+				</div>
 			</div>
 
 			{sortedAndSearchedWords.map((word, index) => (
-				<div className="words-page__card" key={word.nameRU}>
+				<div className="words-page__card" key={word.id}>
 					<div className="words-page__card-en">
 						{index + 1}. {word.name}
 					</div>

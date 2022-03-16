@@ -1,0 +1,15 @@
+@import "src/assets/styles/variables";
+
+.my-button {
+  width: 60px;
+  border: 1px solid $second-text;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 12px;
+  transition: all 0.5s;
+  background-color: $second-text;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}

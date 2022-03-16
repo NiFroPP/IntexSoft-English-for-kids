@@ -20,13 +20,15 @@
   },
   "homepage": "https://github.com/NiFroPP/IntexSoft-English-for-kids#readme",
   "dependencies": {
+    "@types/swagger-ui-express": "^4.1.3",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.1.7"
+    "mongoose": "^6.1.7",
+    "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",

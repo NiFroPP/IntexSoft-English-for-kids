@@ -12,20 +12,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import schema from './validation';
 import allEndpoints from '../../api';
 import PATHS from '../../models/enum/paths.enum';
+import { RegistrationRequestDto } from '../../models/dto/registration.request.dto';
 
 import './registration.page.scss';
 
-export interface IRegistration {
-	username: string;
-	email: string;
-	password: string;
-}
-
 type InputProps = {
-	label: Path<IRegistration>;
-	register: UseFormRegister<IRegistration>;
+	label: Path<RegistrationRequestDto>;
+	register: UseFormRegister<RegistrationRequestDto>;
 	required: boolean;
-	errors: FieldErrors<IRegistration>;
+	errors: FieldErrors<RegistrationRequestDto>;
 };
 
 function Input({ label, register, required, errors }: InputProps) {
@@ -52,9 +47,9 @@ function RegistrationPage() {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<IRegistration>({ resolver: yupResolver(schema) });
+	} = useForm<RegistrationRequestDto>({ resolver: yupResolver(schema) });
 
-	const onSubmit: SubmitHandler<IRegistration> = async (data) => {
+	const onSubmit: SubmitHandler<RegistrationRequestDto> = async (data) => {
 		const response = await allEndpoints.auth.registration(data);
 		if (response.error) {
 			setResponseErr(response.data.message);

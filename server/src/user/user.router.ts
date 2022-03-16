@@ -1,7 +1,6 @@
 import { body } from 'express-validator'
 import { Router } from 'express'
 import UserController from './user.controller'
-import { authMiddleware } from '../middlewares/auth.middleware'
 
 const router = Router()
 
@@ -13,6 +12,5 @@ router.post(
   UserController.registration
 )
 router.post('/login', UserController.login)
-router.get('/all', authMiddleware, UserController.getAllUsers)
 
 export = router

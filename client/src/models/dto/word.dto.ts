@@ -1,4 +1,5 @@
-export interface AllWordsDto {
+export interface WordDto {
+	id: string;
 	name: string;
 	nameRU: string;
 	category: string;

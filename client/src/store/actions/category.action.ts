@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 
 import allEndpoints from '../../api';
-import { CategoryRequest } from '../../api/endpoints/category.endpoint';
+import { CategoryRequestDto } from '../../models/dto/category.request.dto';
 import {
 	CategoryActionType,
 	setCategoryData
@@ -22,7 +22,7 @@ export const fetchCategories = () => {
 	};
 };
 
-export const fetchCategory = (name: CategoryRequest) => {
+export const fetchCategory = (name: CategoryRequestDto) => {
 	return async (dispatch: Dispatch<CategoryActionType>): Promise<void> => {
 		try {
 			dispatch(setCategoryData({ isLoading: true }));

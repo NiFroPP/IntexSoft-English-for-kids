@@ -3,11 +3,13 @@ export const SET_DATA = '[user-reducer] SET_DATA';
 export type UserActionType = ReturnType<typeof setUserData>;
 export interface User {
 	isLogin: boolean;
+	isAdmin: boolean;
 	username: string;
 }
 
 const initialStore: User = {
 	isLogin: false,
+	isAdmin: true,
 	username: ''
 };
 

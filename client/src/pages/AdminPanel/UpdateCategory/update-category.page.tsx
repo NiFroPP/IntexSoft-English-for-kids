@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
@@ -7,10 +7,10 @@ import schema from './update-category.validation';
 import allEndpoints from '../../../api';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
-import { UpdateCategoryRequestDto } from '../../../models/dto/request/updateCategory.request.dto';
+import { UpdateCategoryRequestDto } from '../../../models/dto/request/update-category.request.dto';
 
-import MyInputComponent from '../../../components/common/MyInput/MyInput.component';
-import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/SubmitBtn.component';
+import MyInputComponent from '../../../components/common/MyInput/my-input.component';
+import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/submit-btn.component';
 
 import '../admin-panel.page.scss';
 
@@ -22,6 +22,7 @@ type Inputs = {
 };
 
 function UpdateCategoryPage() {
+	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
 	const {
 		register,
@@ -30,6 +31,7 @@ function UpdateCategoryPage() {
 	} = useForm<Inputs>({ resolver: yupResolver(schema) });
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		setDisabled(true);
 		const compressedImageFileAsString = await getCompressedImageAsString(data);
 		const name = data['category for update'];
 
@@ -72,7 +74,7 @@ function UpdateCategoryPage() {
 					type="file"
 					accept="image/*"
 				/>
-				<SubmitBtn />
+				<SubmitBtn disabled={disabled} />
 			</form>
 		</div>
 	);

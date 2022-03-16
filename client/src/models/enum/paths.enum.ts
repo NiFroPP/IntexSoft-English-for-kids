@@ -10,7 +10,6 @@ enum PATHS {
 	ADMIN_PANEL__CREATE_WORD = '/admin_panel/create_word',
 	ADMIN_PANEL__UPDATE_WORD = '/admin_panel/update_word',
 	ADMIN_PANEL__DELETE_WORD = '/admin_panel/delete_word',
-	USER_SETTING = '/user_setting',
 	WORDS = '/words',
 	OTHER = '*'
 }

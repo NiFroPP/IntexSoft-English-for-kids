@@ -13,20 +13,17 @@ import schema from './validation';
 import allEndpoints from '../../api';
 import { useAppDispatch } from '../../hooks/useTypeSelector';
 import { setUserData } from '../../store/reducers/user.reducer';
+import { getUserFromToken } from '../../utils/getUserFromToken';
 import PATHS from '../../models/enum/paths.enum';
+import { LoginRequestDto } from '../../models/dto/login.request.dto';
 
 import './login.page.scss';
 
-export interface ILogin {
-	email: string;
-	password: string;
-}
-
 type InputProps = {
-	label: Path<ILogin>;
-	register: UseFormRegister<ILogin>;
+	label: Path<LoginRequestDto>;
+	register: UseFormRegister<LoginRequestDto>;
 	required: boolean;
-	errors: FieldErrors<ILogin>;
+	errors: FieldErrors<LoginRequestDto>;
 };
 
 function Input({ label, register, required, errors }: InputProps) {
@@ -52,16 +49,19 @@ function LoginPage() {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<ILogin>({ resolver: yupResolver(schema) });
+	} = useForm<LoginRequestDto>({ resolver: yupResolver(schema) });
 
-	const onSubmit: SubmitHandler<ILogin> = async (data) => {
+	const onSubmit: SubmitHandler<LoginRequestDto> = async (data) => {
 		const response = await allEndpoints.auth.login(data);
 
 		if (response.error) {
 			setResponseErr(response.data.message);
 		} else {
 			localStorage.setItem('auth-token', JSON.stringify(response.data));
-			dispatch(setUserData({ username: response.data.username }));
+			const user = getUserFromToken(response.data);
+			dispatch(
+				setUserData({ username: user.username, isAdmin: user.role === 'ADMIN' })
+			);
 			navigate(PATHS.ABOUT);
 		}
 	};

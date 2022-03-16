@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import PATHS from '../../../../models/enum/paths.enum';
 
-function SubmitBtn() {
+function SubmitBtn(props: any) {
 	return (
 		<div className="admin-panel-page__btn">
 			<Link
@@ -11,7 +11,7 @@ function SubmitBtn() {
 				to={PATHS.ADMIN_PANEL}>
 				Go to `Admin panel`
 			</Link>
-			<input type="submit" />
+			<input type="submit" {...props} />
 		</div>
 	);
 }

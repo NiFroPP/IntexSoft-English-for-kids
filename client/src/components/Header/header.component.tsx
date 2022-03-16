@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import PATHS from '../../models/enum/paths.enum';
-import HeaderUserComponent from './header-user-component/header_user.component';
+
+import HeaderUserComponent from './header-user-component/header-user.component';
 
 import './header.component.scss';
 

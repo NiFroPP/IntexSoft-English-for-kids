@@ -1,13 +1,10 @@
 import axios from '../axios';
 
-import { AllWordsDto } from '../../models/dto/allWords.dto';
+import { WordDto } from '../../models/dto/word.dto';
 import { CategoryWithoutCardsDto } from '../../models/dto/categoriesWithoutCards.dto';
-import { OneCategoryDto } from '../../models/dto/oneCaregory.dto';
-import REQUEST_PATH from '../../models/enum/requestPath.enum';
-
-export interface CategoryRequest {
-	name?: string;
-}
+import { CategoryRequestDto } from '../../models/dto/category.request.dto';
+import { CategoryResponseDto } from '../../models/dto/category.response.dto';
+import REQUEST_PATH from '../../models/enum/request-path.enum';
 
 const categoryEndpoints = {
 	async getAllCategoriesWithoutCards(): Promise<CategoryWithoutCardsDto[]> {
@@ -18,15 +15,17 @@ const categoryEndpoints = {
 		return response.data;
 	},
 
-	async getAllWords(): Promise<AllWordsDto[]> {
-		const response = await axios.get<AllWordsDto[]>(REQUEST_PATH.GET_ALL_WORDS);
+	async getAllWords(): Promise<WordDto[]> {
+		const response = await axios.get<WordDto[]>(REQUEST_PATH.GET_ALL_WORDS);
 
 		return response.data;
 	},
 
-	async getOneCategory(data: CategoryRequest): Promise<OneCategoryDto> {
-		const response = await axios.get<OneCategoryDto>(
-			`${REQUEST_PATH.GET_ONE_CATEGORY}/${data.name}`
+	async getOneCategory(
+		category: CategoryRequestDto
+	): Promise<CategoryResponseDto> {
+		const response = await axios.get<CategoryResponseDto>(
+			`${REQUEST_PATH.GET_ONE_CATEGORY}/${category.name}`
 		);
 
 		return response.data;

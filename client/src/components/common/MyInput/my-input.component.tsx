@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldErrors, Path, UseFormRegister } from 'react-hook-form';
 
-import './MyInput.component.scss';
+import './my-input.component.scss';
 
 type InputProps = {
 	label: Path<any>;

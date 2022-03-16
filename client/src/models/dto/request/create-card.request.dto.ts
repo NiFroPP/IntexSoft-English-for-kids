@@ -1,4 +1,4 @@
-export interface CreateWordRequestDto {
+export interface CreateCardRequestDto {
 	cards: {
 		name: string;
 		nameRU: string;

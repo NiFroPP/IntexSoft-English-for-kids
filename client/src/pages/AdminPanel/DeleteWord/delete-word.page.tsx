@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
 import schema from './delete-word.validation';
 
-import MyInputComponent from '../../../components/common/MyInput/MyInput.component';
-import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/SubmitBtn.component';
+import MyInputComponent from '../../../components/common/MyInput/my-input.component';
+import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/submit-btn.component';
 import allEndpoints from '../../../api';
 import PATHS from '../../../models/enum/paths.enum';
-import { DeleteCardRequestDto } from '../../../models/dto/request/deleteCard.request.dto';
+import { DeleteCardRequestDto } from '../../../models/dto/request/delete-card.request.dto';
 
 import '../admin-panel.page.scss';
 
@@ -19,6 +19,7 @@ type Inputs = {
 };
 
 function DeleteWordPage() {
+	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
 	const {
 		register,
@@ -27,6 +28,7 @@ function DeleteWordPage() {
 	} = useForm<Inputs>({ resolver: yupResolver(schema) });
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		setDisabled(true);
 		const requestData: DeleteCardRequestDto = {
 			name: data['category to delete'],
 			cards: {
@@ -54,7 +56,7 @@ function DeleteWordPage() {
 					errors={errors}
 					placeholder="word"
 				/>
-				<SubmitBtn />
+				<SubmitBtn disabled={disabled} />
 			</form>
 		</div>
 	);

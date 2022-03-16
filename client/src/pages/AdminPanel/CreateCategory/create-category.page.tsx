@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
@@ -7,10 +7,10 @@ import schema from './create-category.validation';
 import allEndpoints from '../../../api';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
-import { CreateCategoryRequestDto } from '../../../models/dto/request/createCategory.request.dto';
+import { CreateCategoryRequestDto } from '../../../models/dto/request/create-category.request.dto';
 
-import MyInputComponent from '../../../components/common/MyInput/MyInput.component';
-import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/SubmitBtn.component';
+import MyInputComponent from '../../../components/common/MyInput/my-input.component';
+import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/submit-btn.component';
 
 import '../admin-panel.page.scss';
 
@@ -21,6 +21,8 @@ type Inputs = {
 };
 
 function CreateCategoryPage() {
+	const [responseErr, setResponseErr] = useState('');
+	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
 	const {
 		register,
@@ -29,6 +31,7 @@ function CreateCategoryPage() {
 	} = useForm<Inputs>({ resolver: yupResolver(schema) });
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		setDisabled(true);
 		const compressedImageFileAsString = await getCompressedImageAsString(data);
 
 		const requestData: CreateCategoryRequestDto = {
@@ -37,8 +40,13 @@ function CreateCategoryPage() {
 			image: compressedImageFileAsString
 		};
 
-		await allEndpoints.adminPanel.createCategory(requestData);
-		navigate(PATHS.ADMIN_PANEL);
+		const response = await allEndpoints.adminPanel.createCategory(requestData);
+		if (response.error) {
+			setResponseErr(response.data.message);
+			setDisabled(false);
+		} else {
+			navigate(PATHS.ADMIN_PANEL);
+		}
 	};
 
 	return (
@@ -64,8 +72,11 @@ function CreateCategoryPage() {
 					type="file"
 					accept="image/*"
 				/>
-				<SubmitBtn />
+				<SubmitBtn disabled={disabled} />
 			</form>
+			{responseErr ? (
+				<h2 className="login-page__error">{responseErr}</h2>
+			) : null}
 		</div>
 	);
 }

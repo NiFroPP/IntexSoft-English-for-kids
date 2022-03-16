@@ -1,25 +1,25 @@
 import axios from '../axios';
+import { api, Response } from '../api-client/api-client';
 
-import REQUEST_PATH from '../../models/enum/requestPath.enum';
-import { CreateCategoryRequestDto } from '../../models/dto/request/createCategory.request.dto';
-import { CreateCategoryResponseDto } from '../../models/dto/response/createCategory.response.dto';
-import { UpdateCategoryRequestDto } from '../../models/dto/request/updateCategory.request.dto';
-import { UpdateCategoryResponseDto } from '../../models/dto/response/updateCategory.response.dto';
-import { DeleteCategoryRequestDto } from '../../models/dto/request/deleteCategory.request.dto';
-import { CreateWordRequestDto } from '../../models/dto/request/createWord.request.dto';
-import { UpdateCardRequestDto } from '../../models/dto/request/updateCard.request.dto';
-import { DeleteCardRequestDto } from '../../models/dto/request/deleteCard.request.dto';
+import REQUEST_PATH from '../../models/enum/request-path.enum';
+import { CreateCategoryRequestDto } from '../../models/dto/request/create-category.request.dto';
+import { CreateCategoryResponseDto } from '../../models/dto/response/create-category.response.dto';
+import { UpdateCategoryRequestDto } from '../../models/dto/request/update-category.request.dto';
+import { UpdateCategoryResponseDto } from '../../models/dto/response/update-category.response.dto';
+import { DeleteCategoryRequestDto } from '../../models/dto/request/delete-category.request.dto';
+import { CreateCardRequestDto } from '../../models/dto/request/create-card.request.dto';
+import { UpdateCardRequestDto } from '../../models/dto/request/update-card.request.dto';
+import { DeleteCardRequestDto } from '../../models/dto/request/delete-card.request.dto';
 
 const adminPanelEndpoints = {
 	async createCategory(
 		data: CreateCategoryRequestDto
-	): Promise<CreateCategoryResponseDto> {
-		const response = await axios.post<CreateCategoryResponseDto>(
-			REQUEST_PATH.CREATE_CATEGORY,
-			data
-		);
-
-		return response.data;
+	): Promise<Response<CreateCategoryResponseDto, { message: string }>> {
+		return api.post<
+			CreateCategoryRequestDto,
+			CreateCategoryResponseDto,
+			{ message: string }
+		>(REQUEST_PATH.CREATE_CATEGORY, data);
 	},
 
 	async updateCategory(
@@ -42,8 +42,8 @@ const adminPanelEndpoints = {
 		return response.data;
 	},
 
-	async createCard(name: string, data: CreateWordRequestDto) {
-		const response = await axios.post(
+	async createCard(name: string, data: CreateCardRequestDto): Promise<void> {
+		const response = await axios.post<void>(
 			`${REQUEST_PATH.CREATE_CARD}/${name}`,
 			data
 		);

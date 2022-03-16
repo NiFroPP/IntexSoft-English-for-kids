@@ -1,9 +1,11 @@
-import { Schema, model, Document } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
-export interface User extends Document {
+export interface User {
+  _id: Types.ObjectId
   email: string
   password: string
   username: string
+  role: string
 }
 
 const schema = new Schema<User>(
@@ -11,6 +13,7 @@ const schema = new Schema<User>(
     email: { type: String, unique: true, require: true },
     password: { type: String, require: true },
     username: { type: String, required: true },
+    role: { type: String, required: false, default: 'USER' },
   },
   {
     versionKey: false,

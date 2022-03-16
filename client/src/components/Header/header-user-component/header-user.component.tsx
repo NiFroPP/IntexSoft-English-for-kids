@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/useTypeSelector';
 import { setUserData } from '../../../store/reducers/user.reducer';
+import { getUserFromToken } from '../../../utils/getUserFromToken';
 import PATHS from '../../../models/enum/paths.enum';
 
-import './header_user.component.scss';
+import HeaderAdminPanel from '../header-admin-panel-component/header-admin-panel.component';
+import MyButton from '../../common/MyButton/my-button.component';
+
+import './header-user.component.scss';
 
 function HeaderUserComponent() {
 	const { username, isLogin } = useAppSelector((state) => state.user);
@@ -13,12 +17,14 @@ function HeaderUserComponent() {
 	const dispatch = useAppDispatch();
 
 	const loading = () => {
-		const user = localStorage.getItem('auth-token');
-		if (user) {
+		const token = localStorage.getItem('auth-token');
+		if (token) {
+			const user = getUserFromToken(JSON.parse(token));
+
 			dispatch(
 				setUserData({
 					isLogin: true,
-					username: JSON.parse(user).username
+					username: user.username
 				})
 			);
 			navigate(PATHS.CATEGORY);
@@ -32,23 +38,15 @@ function HeaderUserComponent() {
 		dispatch(setUserData({ username: '', isLogin: false }));
 	};
 
-	const goToSettingPage = () => {
-		navigate(PATHS.ADMIN_PANEL);
-	};
-
 	return (
 		<div className="header__user">
 			{isLogin ? (
 				<>
-					<div
-						className="header__user-name"
-						onClick={goToSettingPage}
-						aria-hidden="true">
-						{username}
+					<HeaderAdminPanel />
+					<div className="header__user-info">
+						<div className="header__user-name">{username}</div>
+						<MyButton onClick={logout}>Logout</MyButton>
 					</div>
-					<button type="button" className="header__user-btn" onClick={logout}>
-						Logout
-					</button>
 				</>
 			) : null}
 		</div>

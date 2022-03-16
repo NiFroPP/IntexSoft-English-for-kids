@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
@@ -8,10 +8,10 @@ import allEndpoints from '../../../api';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import { getSoundAsString } from '../../../utils/getSoundAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
-import { CreateWordRequestDto } from '../../../models/dto/request/createWord.request.dto';
+import { CreateCardRequestDto } from '../../../models/dto/request/create-card.request.dto';
 
-import MyInputComponent from '../../../components/common/MyInput/MyInput.component';
-import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/SubmitBtn.component';
+import MyInputComponent from '../../../components/common/MyInput/my-input.component';
+import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/submit-btn.component';
 
 import '../admin-panel.page.scss';
 
@@ -24,6 +24,7 @@ type Inputs = {
 };
 
 function CreateWordPage() {
+	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
 	const {
 		register,
@@ -32,11 +33,12 @@ function CreateWordPage() {
 	} = useForm<Inputs>({ resolver: yupResolver(schema) });
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		setDisabled(true);
 		const compressedImageFileAsString = await getCompressedImageAsString(data);
 		const soundFileAsString = await getSoundAsString(data);
 		const name = data['category for adding word'];
 
-		const requestData: CreateWordRequestDto = {
+		const requestData: CreateCardRequestDto = {
 			cards: {
 				name: data['word in English'],
 				nameRU: data['word in Russian'],
@@ -84,7 +86,7 @@ function CreateWordPage() {
 					type="file"
 					accept="audio/*"
 				/>
-				<SubmitBtn />
+				<SubmitBtn disabled={disabled} />
 			</form>
 		</div>
 	);

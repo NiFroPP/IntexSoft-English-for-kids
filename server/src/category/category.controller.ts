@@ -1,26 +1,29 @@
 import { Request, Response } from 'express'
 import CategoryService from './category.service'
 import { wrapTryCatch } from '../utils/wrapTryCatch.utility'
+import { AddCategoryRequestDto } from './dto/addCategory.request.dto'
+import { UpdCategoryRequestDto } from './dto/updCategory.request.dto'
+import { AddCardRequestDto } from './dto/addCard.request.dto'
+import { UpdCardRequestDto } from './dto/updCard.request.dto'
 
 const CategoryController = {
   addCategory: wrapTryCatch(async (req: Request, res: Response) => {
-    const { name, nameRU, image } = req.body
-    const newCategory = await CategoryService.addCategory(name, nameRU, image)
+    const { name, nameRU, image }: AddCategoryRequestDto = req.body
+    await CategoryService.addCategory(name, nameRU, image)
 
-    res.status(201).json(newCategory)
+    res.status(201).json({
+      message: `Category '${name}' was created'`,
+    })
   }),
 
   updateCategory: wrapTryCatch(async (req: Request, res: Response) => {
     const { name } = req.params
-    const { updName, updNameRU, updImage } = req.body
-    const updCategory = await CategoryService.updateCategory(
-      name,
-      updName,
-      updNameRU,
-      updImage
-    )
+    const { updName, updNameRU, updImage }: UpdCategoryRequestDto = req.body
+    await CategoryService.updateCategory(name, updName, updNameRU, updImage)
 
-    res.json(updCategory)
+    res.json({
+      message: `Category '${name}' was changed`,
+    })
   }),
 
   deleteCategory: wrapTryCatch(async (req: Request, res: Response) => {
@@ -32,7 +35,7 @@ const CategoryController = {
 
   addCard: wrapTryCatch(async (req: Request, res: Response) => {
     const { name } = req.params
-    const { cards } = req.body
+    const { cards }: AddCardRequestDto = req.body
     await CategoryService.addCard(name, cards)
 
     res.status(201).json({
@@ -42,7 +45,7 @@ const CategoryController = {
 
   updateCard: wrapTryCatch(async (req: Request, res: Response) => {
     const { name, word } = req.params
-    const { updCard } = req.body
+    const { updCard }: UpdCardRequestDto = req.body
     await CategoryService.updateCard(name, word, updCard)
 
     res.json({
@@ -84,6 +87,7 @@ const CategoryController = {
     const data = await CategoryService.getAllWords()
     const words = data.flatMap((word) =>
       word.cards.map((card) => ({
+        id: card._id,
         name: card.name,
         nameRU: card.nameRU,
         category: word.name,
