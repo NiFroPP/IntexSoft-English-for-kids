@@ -3,4 +3,5 @@ export interface RegistrationResponseDto {
   email: string
   password: string
   username: string
+  role: string
 }

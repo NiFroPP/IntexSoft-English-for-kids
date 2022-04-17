@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/useTypeSelector';
+import { getUser } from '../../../store/selectors/index.selector';
 import { setUserData } from '../../../store/reducers/user.reducer';
 import { getUserFromToken } from '../../../utils/getUserFromToken';
 import PATHS from '../../../models/enum/paths.enum';
@@ -12,7 +13,7 @@ import MyButton from '../../common/MyButton/my-button.component';
 import './header-user.component.scss';
 
 function HeaderUserComponent() {
-	const { username, isLogin } = useAppSelector((state) => state.user);
+	const { username, isLogin } = useAppSelector(getUser);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 

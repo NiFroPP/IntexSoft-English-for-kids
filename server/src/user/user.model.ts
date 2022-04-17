@@ -5,7 +5,7 @@ export interface User {
   email: string
   password: string
   username: string
-  role: string
+  role?: string
 }
 
 const schema = new Schema<User>(
