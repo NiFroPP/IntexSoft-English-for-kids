@@ -18,6 +18,7 @@ type Inputs = {
 };
 
 function DeleteCategoryPage() {
+	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
 	const {
@@ -32,8 +33,14 @@ function DeleteCategoryPage() {
 			name: data['category to delete']
 		};
 
-		await allEndpoints.adminPanel.deleteCategory(requestData);
-		navigate(PATHS.ADMIN_PANEL);
+		const response = await allEndpoints.adminPanel.deleteCategory(requestData);
+
+		if (response.error) {
+			setResponseErr(response.data.message);
+			setDisabled(false);
+		} else {
+			navigate(PATHS.ADMIN_PANEL);
+		}
 	};
 
 	return (
@@ -48,6 +55,9 @@ function DeleteCategoryPage() {
 				/>
 				<SubmitBtn disabled={disabled} />
 			</form>
+			{responseErr ? (
+				<h2 className="login-page__error">{responseErr}</h2>
+			) : null}
 		</div>
 	);
 }

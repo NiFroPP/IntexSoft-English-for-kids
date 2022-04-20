@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/useTypeSelector';
+import { useAppSelector } from '../../../hooks/useTypeSelector';
 import { getUser } from '../../../store/selectors/index.selector';
 import { setUserData } from '../../../store/reducers/user.reducer';
 import { getUserFromToken } from '../../../utils/getUserFromToken';
@@ -15,7 +16,7 @@ import './header-user.component.scss';
 function HeaderUserComponent() {
 	const { username, isLogin } = useAppSelector(getUser);
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 
 	const loading = () => {
 		const token = localStorage.getItem('auth-token');

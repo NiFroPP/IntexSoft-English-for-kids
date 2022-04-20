@@ -19,6 +19,7 @@ type Inputs = {
 };
 
 function DeleteWordPage() {
+	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
 	const {
@@ -36,8 +37,14 @@ function DeleteWordPage() {
 			}
 		};
 
-		await allEndpoints.adminPanel.deleteCard(requestData);
-		navigate(PATHS.ADMIN_PANEL);
+		const response = await allEndpoints.adminPanel.deleteCard(requestData);
+
+		if (response.error) {
+			setResponseErr(response.data.message);
+			setDisabled(false);
+		} else {
+			navigate(PATHS.ADMIN_PANEL);
+		}
 	};
 
 	return (
@@ -58,6 +65,9 @@ function DeleteWordPage() {
 				/>
 				<SubmitBtn disabled={disabled} />
 			</form>
+			{responseErr ? (
+				<h2 className="login-page__error">{responseErr}</h2>
+			) : null}
 		</div>
 	);
 }

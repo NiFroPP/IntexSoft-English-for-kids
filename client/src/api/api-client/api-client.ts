@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, Method } from 'axios';
 
 import axiosInstance from '../axios';
 
@@ -19,9 +19,17 @@ class ApiClient {
 		this.axiosInstance = axiosInstance;
 	}
 
-	async post<D, R, E>(url: string, data: D): Promise<Response<R, E>> {
+	async request<D, R, E>(
+		method: Method,
+		url: string,
+		data?: D
+	): Promise<Response<R, E>> {
 		try {
-			const response = await this.axiosInstance.post<R>(url, data);
+			const response = await this.axiosInstance.request<R>({
+				url,
+				data,
+				method
+			});
 
 			return {
 				error: false,
@@ -37,6 +45,18 @@ class ApiClient {
 
 			throw error;
 		}
+	}
+
+	async post<D, R, E>(url: string, data: D): Promise<Response<R, E>> {
+		return this.request('POST', url, data);
+	}
+
+	async patch<D, R, E>(url: string, data: D): Promise<Response<R, E>> {
+		return this.request('PATCH', url, data);
+	}
+
+	async delete<R, E>(url: string): Promise<Response<R, E>> {
+		return this.request('DELETE', url);
 	}
 }
 

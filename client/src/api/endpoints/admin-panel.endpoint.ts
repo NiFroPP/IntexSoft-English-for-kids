@@ -1,4 +1,3 @@
-import axios from '../axios';
 import { api, Response } from '../api-client/api-client';
 
 import REQUEST_PATH from '../../models/enum/request-path.enum';
@@ -10,66 +9,65 @@ import { DeleteCategoryRequestDto } from '../../models/dto/request/delete-catego
 import { CreateCardRequestDto } from '../../models/dto/request/create-card.request.dto';
 import { UpdateCardRequestDto } from '../../models/dto/request/update-card.request.dto';
 import { DeleteCardRequestDto } from '../../models/dto/request/delete-card.request.dto';
+import { ErrorResponseDto } from '../../models/dto/error.response.dto';
 
 const adminPanelEndpoints = {
 	async createCategory(
 		data: CreateCategoryRequestDto
-	): Promise<Response<CreateCategoryResponseDto, { message: string }>> {
+	): Promise<Response<CreateCategoryResponseDto, ErrorResponseDto>> {
 		return api.post<
 			CreateCategoryRequestDto,
 			CreateCategoryResponseDto,
-			{ message: string }
+			ErrorResponseDto
 		>(REQUEST_PATH.CREATE_CATEGORY, data);
 	},
 
 	async updateCategory(
 		name: string,
 		data: UpdateCategoryRequestDto
-	): Promise<UpdateCategoryResponseDto> {
-		const response = await axios.patch<UpdateCategoryResponseDto>(
-			`${REQUEST_PATH.UPDATE_CATEGORY}/${name}`,
-			data
-		);
-
-		return response.data;
+	): Promise<Response<UpdateCategoryResponseDto, ErrorResponseDto>> {
+		return api.patch<
+			UpdateCategoryRequestDto,
+			UpdateCategoryResponseDto,
+			ErrorResponseDto
+		>(`${REQUEST_PATH.UPDATE_CATEGORY}/${name}`, data);
 	},
 
-	async deleteCategory(data: DeleteCategoryRequestDto): Promise<void> {
-		const response = await axios.delete<void>(
+	async deleteCategory(
+		data: DeleteCategoryRequestDto
+	): Promise<Response<void, ErrorResponseDto>> {
+		return api.delete<void, ErrorResponseDto>(
 			`${REQUEST_PATH.DELETE_CATEGORY}/${data.name}`
 		);
-
-		return response.data;
 	},
 
-	async createCard(name: string, data: CreateCardRequestDto): Promise<void> {
-		const response = await axios.post<void>(
+	async createCard(
+		name: string,
+		data: CreateCardRequestDto
+	): Promise<Response<void, ErrorResponseDto>> {
+		return api.post<CreateCardRequestDto, void, ErrorResponseDto>(
 			`${REQUEST_PATH.CREATE_CARD}/${name}`,
 			data
 		);
-
-		return response.data;
 	},
 
 	async updateCard(
 		name: string,
 		cardName: string,
 		data: UpdateCardRequestDto
-	): Promise<void> {
-		const response = await axios.patch<void>(
+	): Promise<Response<void, ErrorResponseDto>> {
+		return api.patch<UpdateCardRequestDto, void, ErrorResponseDto>(
 			`${REQUEST_PATH.UPDATE_CARD}/${name}/${cardName}`,
 			data
 		);
-
-		return response.data;
 	},
 
-	async deleteCard(data: DeleteCardRequestDto): Promise<void> {
-		const response = await axios.delete<void>(
+	async deleteCard(
+		data: DeleteCardRequestDto
+	): Promise<Response<void, ErrorResponseDto>> {
+		return api.delete<void, ErrorResponseDto>(
 			`${REQUEST_PATH.DELETE_CARD}/${data.name}/${data.cards.name}`
 		);
-
-		return response.data;
 	}
 };
 

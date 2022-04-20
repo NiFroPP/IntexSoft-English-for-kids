@@ -6,12 +6,12 @@ import {
 	UseFormRegister,
 	FieldErrors
 } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from 'react-router-dom';
 
 import schema from './validation';
 import allEndpoints from '../../api';
-import { useAppDispatch } from '../../hooks/useTypeSelector';
 import { setUserData } from '../../store/reducers/user.reducer';
 import { getUserFromToken } from '../../utils/getUserFromToken';
 import PATHS from '../../models/enum/paths.enum';
@@ -41,7 +41,7 @@ function Input({ label, register, required, errors }: InputProps) {
 }
 
 function LoginPage() {
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [responseErr, setResponseErr] = useState('');
 

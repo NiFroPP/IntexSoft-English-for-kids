@@ -18,7 +18,7 @@ export const authMiddleware = (
       throw CustomErrors.unauthorizedError()
     }
 
-    jwt.verify(token!, config.jwtSecretKey)
+    jwt.verify(token, config.jwtSecretKey)
 
     next()
   } catch (e) {

@@ -2,6 +2,17 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "lint": "eslint ./src"
+  },
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",
     "@testing-library/jest-dom": "^5.16.1",
@@ -11,18 +22,17 @@
     "@types/jest": "^27.4.0",
     "@types/jwt-decode": "^3.1.0",
     "@types/node": "^16.11.21",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "@types/react-redux": "^7.1.22",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.1",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.25.0",
     "eslint-plugin-react-redux": "^3.3.4",
     "jwt-decode": "^3.1.2",
-    "react": "^17.0.2",
+    "react": "^17.0.0",
     "react-burger-menu": "^3.0.6",
-    "react-dom": "^17.0.2",
+    "react-dom": "^17.0.0",
     "react-hook-form": "^7.25.1",
-    "react-redux": "^7.2.6",
+    "react-redux": "^8.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "redux": "^4.1.2",
@@ -30,23 +40,24 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.0",
     "typescript": "^4.5.5",
-    "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "stylelint": "npx stylelint '**/*.scss' --syntax scss --fix",
-    "prettier": "prettier --write .",
-    "lint": "eslint ./src",
-    "format": "prettier --write ./src && eslint ./src",
-    "lint:fix": "eslint --fix ."
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "@types/react-burger-menu": "^2.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-stylelint": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.5.1",
+    "stylelint": "^14.3.0",
+    "stylelint-config-sass-guidelines": "^9.0.1"
   },
   "browserslist": {
     "production": [
@@ -59,22 +70,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/react-burger-menu": "^2.8.3",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
-    "eslint": "^8.7.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-config-stylelint": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^2.5.1",
-    "stylelint": "^14.3.0",
-    "stylelint-config-sass-guidelines": "^9.0.1"
   }
 }
