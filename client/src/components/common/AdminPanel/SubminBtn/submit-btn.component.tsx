@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 
 import PATHS from '../../../../models/enum/paths.enum';
 
-function SubmitBtn(props: any) {
+type Props = {
+	disabled: boolean;
+};
+
+function SubmitBtn(props: Props) {
 	return (
 		<div className="admin-panel-page__btn">
 			<Link

@@ -7,21 +7,21 @@ export interface SelectOptions {
 	name: string;
 }
 
-function MySelectComponent({
+function MySelectComponent<T extends string>({
 	value,
 	onChange,
 	options,
 	defaultValue
 }: {
-	value: string;
-	onChange: React.Dispatch<React.SetStateAction<string>>;
+	value: T;
+	onChange: React.Dispatch<React.SetStateAction<T>>;
 	options: SelectOptions[];
-	defaultValue: string;
+	defaultValue: T;
 }) {
 	return (
 		<select
 			value={value}
-			onChange={(e) => onChange(e.target.value)}
+			onChange={(e) => onChange(e.target.value as T)}
 			className="words-sort">
 			<option value="" disabled>
 				{defaultValue}

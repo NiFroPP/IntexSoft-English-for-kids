@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import {useForm, SubmitHandler, FieldError} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ import '../admin-panel.page.scss';
 type Inputs = {
 	category: string;
 	'category in Russian': string;
-	image: string;
+	image: Array<File>;
 };
 
 function CreateCategoryPage() {
@@ -56,19 +56,19 @@ function CreateCategoryPage() {
 				<MyInputComponent
 					label="category"
 					register={register}
-					errors={errors}
+					error={errors.category}
 					placeholder="add category"
 				/>
 				<MyInputComponent
 					label="category in Russian"
 					register={register}
-					errors={errors}
+					error={errors["category in Russian"]}
 					placeholder="add category in Russian"
 				/>
 				<MyInputComponent
 					label="image"
 					register={register}
-					errors={errors}
+					error={errors.image as (FieldError | undefined)}
 					type="file"
 					accept="image/*"
 				/>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import {useForm, SubmitHandler, FieldError} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,8 +20,8 @@ type Inputs = {
 	'word for updating': string;
 	'new word in English': string;
 	'new word in Russian': string;
-	image: string;
-	sound: string;
+	image: Array<File>;
+	sound: Array<File>;
 };
 
 function UpdateWordPage() {
@@ -71,38 +71,38 @@ function UpdateWordPage() {
 				<MyInputComponent
 					label="category for updating"
 					register={register}
-					errors={errors}
+					error={errors["category for updating"]}
 					placeholder="category name"
 				/>
 				<MyInputComponent
 					label="word for updating"
 					register={register}
-					errors={errors}
+					error={errors["word for updating"]}
 					placeholder="word name"
 				/>
 				<MyInputComponent
 					label="new word in English"
 					register={register}
-					errors={errors}
+					error={errors["new word in English"]}
 					placeholder="new eng name"
 				/>
 				<MyInputComponent
 					label="new word in Russian"
 					register={register}
-					errors={errors}
+					error={errors["new word in Russian"]}
 					placeholder="new rus name"
 				/>
 				<MyInputComponent
 					label="image"
 					register={register}
-					errors={errors}
+					error={errors.image as (FieldError | undefined)}
 					type="file"
 					accept="image/*"
 				/>
 				<MyInputComponent
 					label="sound"
 					register={register}
-					errors={errors}
+					error={errors.sound as (FieldError | undefined)}
 					type="file"
 					accept="audio/*"
 				/>

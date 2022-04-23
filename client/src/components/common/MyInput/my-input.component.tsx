@@ -1,27 +1,27 @@
 import React from 'react';
-import { FieldErrors, Path, UseFormRegister } from 'react-hook-form';
+import {FieldError, Path, UseFormRegister} from 'react-hook-form';
 
 import './my-input.component.scss';
 
-type InputProps = {
-	label: Path<any>;
-	register: UseFormRegister<any>;
+type InputProps<T> = {
+	label: Path<T>;
+	register: UseFormRegister<T>;
 	required?: boolean;
-	errors: FieldErrors<any>;
+	error?: FieldError;
 	placeholder?: string;
 	type?: string;
 	accept?: string;
 };
 
-function MyInputComponent({
+function MyInputComponent<T>({
 	label,
 	register,
 	required = true,
-	errors,
+	error,
 	placeholder,
 	type = 'input',
 	accept
-}: InputProps) {
+}: InputProps<T>) {
 	return (
 		<div className="my-input__item">
 			<div className="my-input__item-input">
@@ -34,8 +34,8 @@ function MyInputComponent({
 					{...register(label, { required })}
 				/>
 			</div>
-			{errors[`${label}`] && (
-				<p className="my-input__error">{errors[`${label}`]?.message}</p>
+			{error && (
+				<p className="my-input__error">{error.message}</p>
 			)}
 		</div>
 	);

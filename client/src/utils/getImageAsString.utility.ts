@@ -1,6 +1,10 @@
 import { getCompressImgBase64 } from './getComressImgBase64.utility';
 
-export const getCompressedImageAsString = async (data: any) => {
+type ImageData = {
+	image: Array<File>
+}
+
+export const getCompressedImageAsString = async (data: ImageData) => {
 	let resizeImageFile = '';
 
 	if (data.image.length > 0) {

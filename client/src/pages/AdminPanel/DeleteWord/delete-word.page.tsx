@@ -54,13 +54,13 @@ function DeleteWordPage() {
 				<MyInputComponent
 					label="category to delete"
 					register={register}
-					errors={errors}
+					error={errors["category to delete"]}
 					placeholder="category name"
 				/>
 				<MyInputComponent
 					label="word to delete"
 					register={register}
-					errors={errors}
+					error={errors["word to delete"]}
 					placeholder="word"
 				/>
 				<SubmitBtn disabled={disabled} />

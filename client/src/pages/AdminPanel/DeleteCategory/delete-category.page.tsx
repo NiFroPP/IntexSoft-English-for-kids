@@ -50,7 +50,7 @@ function DeleteCategoryPage() {
 				<MyInputComponent
 					label="category to delete"
 					register={register}
-					errors={errors}
+					error={errors["category to delete"]}
 					placeholder="name"
 				/>
 				<SubmitBtn disabled={disabled} />

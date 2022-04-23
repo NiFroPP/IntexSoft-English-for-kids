@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import {useForm, SubmitHandler, FieldError} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ type Inputs = {
 	'category for update': string;
 	'new category name': string;
 	'new category name in Russian': string;
-	image: string;
+	image: Array<File>;
 };
 
 function UpdateCategoryPage() {
@@ -62,25 +62,25 @@ function UpdateCategoryPage() {
 				<MyInputComponent
 					label="category for update"
 					register={register}
-					errors={errors}
+					error={errors["category for update"]}
 					placeholder="name"
 				/>
 				<MyInputComponent
 					label="new category name"
 					register={register}
-					errors={errors}
+					error={errors["new category name"]}
 					placeholder="new name"
 				/>
 				<MyInputComponent
 					label="new category name in Russian"
 					register={register}
-					errors={errors}
+					error={errors["new category name in Russian"]}
 					placeholder="new rus name"
 				/>
 				<MyInputComponent
 					label="image"
 					register={register}
-					errors={errors}
+					error={errors.image as (FieldError | undefined)}
 					type="file"
 					accept="image/*"
 				/>

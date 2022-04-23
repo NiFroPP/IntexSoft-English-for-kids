@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import {useForm, SubmitHandler, FieldError} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,8 +19,8 @@ type Inputs = {
 	'category for adding word': string;
 	'word in English': string;
 	'word in Russian': string;
-	image: string;
-	sound: string;
+	image: Array<File>;
+	sound: Array<File>;
 };
 
 function CreateWordPage() {
@@ -68,32 +68,33 @@ function CreateWordPage() {
 				<MyInputComponent
 					label="category for adding word"
 					register={register}
-					errors={errors}
+					error={errors["category for adding word"]}
 					placeholder="category name"
 				/>
 				<MyInputComponent
 					label="word in English"
 					register={register}
-					errors={errors}
+					error={errors["word in English"]}
 					placeholder="add word in English"
 				/>
+
 				<MyInputComponent
 					label="word in Russian"
 					register={register}
-					errors={errors}
+					error={errors["word in Russian"]}
 					placeholder="add word in Russian"
 				/>
 				<MyInputComponent
 					label="image"
 					register={register}
-					errors={errors}
+					error={errors.image as (FieldError | undefined)}
 					type="file"
 					accept="image/*"
 				/>
 				<MyInputComponent
 					label="sound"
 					register={register}
-					errors={errors}
+					error={errors.sound as (FieldError | undefined)}
 					type="file"
 					accept="audio/*"
 				/>

@@ -8,6 +8,7 @@ import MySelectComponent, {
 } from '../../components/common/MySelect/my-select.component';
 
 import './words.page.scss';
+import {WordDto} from "../../models/dto/word.dto";
 
 function WordsPage() {
 	const options: SelectOptions[] = [
@@ -25,7 +26,8 @@ function WordsPage() {
 		}
 	];
 
-	const [sortType, setSortType] = useState('name');
+	const defaultSortType = 'name';
+	const [sortType, setSortType] = useState<keyof WordDto>(defaultSortType);
 	const [searchQuery, setSearchQuery] = useState('');
 	const { fetchAllWords } = useActions();
 	const { words } = useAppSelector(getCategory);
@@ -36,7 +38,7 @@ function WordsPage() {
 
 	const sortedWords = useMemo(
 		() =>
-			[...words].sort((a: any, b: any) =>
+			[...words].sort((a: WordDto, b: WordDto) =>
 				a[sortType].localeCompare(b[sortType])
 			),
 		[sortType, words]
@@ -62,7 +64,7 @@ function WordsPage() {
 			<MySelectComponent
 				value={sortType}
 				onChange={setSortType}
-				defaultValue="--Please choose an option by sort--"
+				defaultValue={defaultSortType}
 				options={options}
 			/>
 
