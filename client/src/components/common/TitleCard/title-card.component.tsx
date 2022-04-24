@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './titleCard.component.scss';
+import './title-card.component.scss';
 
 type TitleProps = {
 	nameEN: string;

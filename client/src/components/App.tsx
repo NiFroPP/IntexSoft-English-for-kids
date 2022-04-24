@@ -1,6 +1,5 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 
-import { useActions } from '../hooks/useActions';
 import HeaderComponent from './Header/header.component';
 import FooterComponent from './Footer/footer.component';
 import RoutesComponent from './Routes/routes.component';
@@ -8,13 +7,7 @@ import LoadingComponent from './common/Loading/loading.component';
 
 const MenuComponent = lazy(() => import('./Menu/menu.component'));
 
-export default function App() {
-	const { fetchCategories } = useActions();
-
-	useEffect(() => {
-		fetchCategories();
-	}, []);
-
+function App() {
 	return (
 		<div className="wrapper">
 			<Suspense fallback={<LoadingComponent />}>
@@ -28,3 +21,5 @@ export default function App() {
 		</div>
 	);
 }
+
+export default App;

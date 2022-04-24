@@ -17,10 +17,9 @@ app.use(
   })
 )
 app.use(cors())
-app.use('/users', userRouter)
-app.use('/categories', categoryRouter)
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use(authMiddleware)
+app.use('/users', userRouter)
+app.use('/categories', authMiddleware, categoryRouter)
 app.use(errorMiddleware)
 
 const start = async (): Promise<void> => {

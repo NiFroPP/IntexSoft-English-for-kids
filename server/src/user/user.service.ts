@@ -49,7 +49,7 @@ class UserService {
 
     return {
       token: jwt.sign({ user }, config.jwtSecretKey, {
-        expiresIn: '1m',
+        expiresIn: '30d',
       }),
     }
   }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../../hooks/useTypeSelector';
+import { useActions } from '../../../hooks/useActions';
 import { getUser } from '../../../store/selectors/index.selector';
 import { setUserData } from '../../../store/reducers/user.reducer';
 import { getUserFromToken } from '../../../utils/getUserFromToken';
@@ -15,6 +16,7 @@ import './header-user.component.scss';
 
 function HeaderUserComponent() {
 	const { username, isLogin } = useAppSelector(getUser);
+	const { fetchCategories } = useActions();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -30,6 +32,9 @@ function HeaderUserComponent() {
 					isAdmin: user.role === 'ADMIN'
 				})
 			);
+			if (username) {
+				fetchCategories();
+			}
 			navigate(PATHS.CATEGORY);
 		}
 	};

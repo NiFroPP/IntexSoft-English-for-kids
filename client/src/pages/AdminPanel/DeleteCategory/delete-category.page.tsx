@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { useNavigate } from 'react-router-dom';
 
 import schema from './delete-category.validation';
 import allEndpoints from '../../../api';
-import { useActions } from '../../../hooks/useActions';
-import PATHS from '../../../models/enum/paths.enum';
+import useRequestByFormData from '../hooks/useRequestByFormData';
 import { DeleteCategoryRequestDto } from '../../../models/dto/request/delete-category.request.dto';
 
 import MyInputComponent from '../../../components/common/MyInput/my-input.component';
@@ -19,32 +17,20 @@ type Inputs = {
 };
 
 function DeleteCategoryPage() {
-	const [responseErr, setResponseErr] = useState('');
-	const [disabled, setDisabled] = useState(false);
-	const navigate = useNavigate();
-	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<Inputs>({ resolver: yupResolver(schema) });
+	const [disabled, responseErr, onSubmit] = useRequestByFormData<Inputs>(
+		(data) => {
+			const requestData: DeleteCategoryRequestDto = {
+				name: data['category to delete']
+			};
 
-	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		setDisabled(true);
-		const requestData: DeleteCategoryRequestDto = {
-			name: data['category to delete']
-		};
-
-		const response = await allEndpoints.adminPanel.deleteCategory(requestData);
-
-		if (response.error) {
-			setResponseErr(response.data.message);
-			setDisabled(false);
-		} else {
-			fetchCategories();
-			navigate(PATHS.ADMIN_PANEL);
+			return allEndpoints.adminPanel.deleteCategory(requestData);
 		}
-	};
+	);
 
 	return (
 		<div className="admin-panel-page__field">

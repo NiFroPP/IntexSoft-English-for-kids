@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/useTypeSelector';
 import { getCategory } from '../../store/selectors/index.selector';
 import PATHS from '../../models/enum/paths.enum';
 
-import TitleCardComponent from '../../components/common/Title-Card/titleCard.component';
+import TitleCardComponent from '../../components/common/TitleCard/title-card.component';
 import LoadingComponent from '../../components/common/Loading/loading.component';
 
 import './categories.page.scss';

@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { useNavigate } from 'react-router-dom';
 
-import { useActions } from '../../../hooks/useActions';
 import schema from './delete-word.validation';
+import useRequestByFormData from '../hooks/useRequestByFormData';
 
 import MyInputComponent from '../../../components/common/MyInput/my-input.component';
 import SubmitBtn from '../../../components/common/AdminPanel/SubminBtn/submit-btn.component';
 import allEndpoints from '../../../api';
-import PATHS from '../../../models/enum/paths.enum';
 import { DeleteCardRequestDto } from '../../../models/dto/request/delete-card.request.dto';
 
 import '../admin-panel.page.scss';
@@ -20,35 +18,23 @@ type Inputs = {
 };
 
 function DeleteWordPage() {
-	const [responseErr, setResponseErr] = useState('');
-	const [disabled, setDisabled] = useState(false);
-	const navigate = useNavigate();
-	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<Inputs>({ resolver: yupResolver(schema) });
+	const [disabled, responseErr, onSubmit] = useRequestByFormData<Inputs>(
+		async (data) => {
+			const requestData: DeleteCardRequestDto = {
+				name: data['category to delete'],
+				cards: {
+					name: data['word to delete']
+				}
+			};
 
-	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		setDisabled(true);
-		const requestData: DeleteCardRequestDto = {
-			name: data['category to delete'],
-			cards: {
-				name: data['word to delete']
-			}
-		};
-
-		const response = await allEndpoints.adminPanel.deleteCard(requestData);
-
-		if (response.error) {
-			setResponseErr(response.data.message);
-			setDisabled(false);
-		} else {
-			fetchCategories();
-			navigate(PATHS.ADMIN_PANEL);
+			return allEndpoints.adminPanel.deleteCard(requestData);
 		}
-	};
+	);
 
 	return (
 		<div className="admin-panel-page__field">

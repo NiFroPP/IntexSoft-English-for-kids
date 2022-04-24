@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
+import React from 'react';
+import { useForm, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { useNavigate } from 'react-router-dom';
 
 import schema from './update-word.validarion';
 import allEndpoints from '../../../api';
-import { useActions } from '../../../hooks/useActions';
+import useRequestByFormData from '../hooks/useRequestByFormData';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import { getSoundAsString } from '../../../utils/getSoundAsString.utility';
-import PATHS from '../../../models/enum/paths.enum';
 import { UpdateCardRequestDto } from '../../../models/dto/request/update-card.request.dto';
 
 import MyInputComponent from '../../../components/common/MyInput/my-input.component';
@@ -26,46 +24,33 @@ type Inputs = {
 };
 
 function UpdateWordPage() {
-	const [responseErr, setResponseErr] = useState('');
-	const [disabled, setDisabled] = useState(false);
-	const navigate = useNavigate();
-	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<Inputs>({ resolver: yupResolver(schema) });
+	const [disabled, responseErr, onSubmit] = useRequestByFormData<Inputs>(
+		async (data) => {
+			const compressedImageFileAsString = await getCompressedImageAsString(
+				data
+			);
+			const soundFileAsString = await getSoundAsString(data);
 
-	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		setDisabled(true);
-		const compressedImageFileAsString = await getCompressedImageAsString(data);
-		const soundFileAsString = await getSoundAsString(data);
+			const name = data['category for updating'];
+			const cardName = data['word for updating'];
 
-		const name = data['category for updating'];
-		const cardName = data['word for updating'];
+			const requestData: UpdateCardRequestDto = {
+				updCard: {
+					name: data['new word in English'],
+					nameRU: data['new word in Russian'],
+					image: compressedImageFileAsString,
+					sound: soundFileAsString
+				}
+			};
 
-		const requestData: UpdateCardRequestDto = {
-			updCard: {
-				name: data['new word in English'],
-				nameRU: data['new word in Russian'],
-				image: compressedImageFileAsString,
-				sound: soundFileAsString
-			}
-		};
-
-		const response = await allEndpoints.adminPanel.updateCard(
-			name,
-			cardName,
-			requestData
-		);
-		if (response.error) {
-			setResponseErr(response.data.message);
-			setDisabled(false);
-		} else {
-			fetchCategories();
-			navigate(PATHS.ADMIN_PANEL);
+			return allEndpoints.adminPanel.updateCard(name, cardName, requestData);
 		}
-	};
+	);
 
 	return (
 		<div className="admin-panel-page__field">

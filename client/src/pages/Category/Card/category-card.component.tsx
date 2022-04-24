@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import TitleCardComponent from '../../../components/common/Title-Card/titleCard.component';
+import TitleCardComponent from '../../../components/common/TitleCard/title-card.component';
 import { Card } from '../category.page';
 
 function CategoryCardComponent({ name, nameRU, sound, image }: Card) {
