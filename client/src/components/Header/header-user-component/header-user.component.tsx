@@ -26,7 +26,8 @@ function HeaderUserComponent() {
 			dispatch(
 				setUserData({
 					isLogin: true,
-					username: user.username
+					username: user.username,
+					isAdmin: user.role === 'ADMIN'
 				})
 			);
 			navigate(PATHS.CATEGORY);
@@ -37,7 +38,7 @@ function HeaderUserComponent() {
 
 	const logout = () => {
 		localStorage.removeItem('auth-token');
-		dispatch(setUserData({ username: '', isLogin: false }));
+		dispatch(setUserData({ username: '', isLogin: false, isAdmin: false }));
 	};
 
 	return (

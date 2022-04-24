@@ -9,7 +9,7 @@ export interface User {
 
 const initialStore: User = {
 	isLogin: false,
-	isAdmin: true,
+	isAdmin: false,
 	username: ''
 };
 

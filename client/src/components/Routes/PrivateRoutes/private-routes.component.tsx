@@ -1,8 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
 
-import { useAppSelector } from '../../../hooks/useTypeSelector';
-import { getUser } from '../../../store/selectors/index.selector';
 import { IRoutes } from '../routes.component';
 import PATHS from '../../../models/enum/paths.enum';
 
@@ -18,7 +15,7 @@ import UpdateWordPage from '../../../pages/AdminPanel/UpdateWord/update-word.pag
 import DeleteWordPage from '../../../pages/AdminPanel/DeleteWord/delete-word.page';
 import WordsPage from '../../../pages/AllWords/words.page';
 
-const privateRoutes: IRoutes[] = [
+export const privateRoutes: IRoutes[] = [
 	{
 		path: PATHS.ABOUT,
 		element: <AboutPage />
@@ -37,7 +34,7 @@ const privateRoutes: IRoutes[] = [
 	}
 ];
 
-const adminRoutes: IRoutes[] = [
+export const adminRoutes: IRoutes[] = [
 	{
 		path: PATHS.ADMIN_PANEL,
 		element: <AdminPanelPage />
@@ -67,27 +64,3 @@ const adminRoutes: IRoutes[] = [
 		element: <DeleteWordPage />
 	}
 ];
-
-function PrivateRoutes() {
-	const { isAdmin } = useAppSelector(getUser);
-
-	return (
-		<div className="main__container">
-			<Routes>
-				{privateRoutes.map(({ path, element }) => (
-					<Route path={path} element={element} key={path} />
-				))}
-			</Routes>
-
-			{isAdmin && (
-				<Routes>
-					{adminRoutes.map(({ path, element }) => (
-						<Route path={path} element={element} key={path} />
-					))}
-				</Routes>
-			)}
-		</div>
-	);
-}
-
-export default PrivateRoutes;

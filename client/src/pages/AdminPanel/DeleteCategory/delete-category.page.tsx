@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import schema from './delete-category.validation';
 import allEndpoints from '../../../api';
+import { useActions } from '../../../hooks/useActions';
 import PATHS from '../../../models/enum/paths.enum';
 import { DeleteCategoryRequestDto } from '../../../models/dto/request/delete-category.request.dto';
 
@@ -21,6 +22,7 @@ function DeleteCategoryPage() {
 	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
+	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
@@ -39,6 +41,7 @@ function DeleteCategoryPage() {
 			setResponseErr(response.data.message);
 			setDisabled(false);
 		} else {
+			fetchCategories();
 			navigate(PATHS.ADMIN_PANEL);
 		}
 	};
@@ -50,7 +53,7 @@ function DeleteCategoryPage() {
 				<MyInputComponent
 					label="category to delete"
 					register={register}
-					error={errors["category to delete"]}
+					error={errors['category to delete']}
 					placeholder="name"
 				/>
 				<SubmitBtn disabled={disabled} />

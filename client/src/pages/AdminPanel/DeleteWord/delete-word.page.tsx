@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
+import { useActions } from '../../../hooks/useActions';
 import schema from './delete-word.validation';
 
 import MyInputComponent from '../../../components/common/MyInput/my-input.component';
@@ -22,6 +23,7 @@ function DeleteWordPage() {
 	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
+	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
@@ -43,6 +45,7 @@ function DeleteWordPage() {
 			setResponseErr(response.data.message);
 			setDisabled(false);
 		} else {
+			fetchCategories();
 			navigate(PATHS.ADMIN_PANEL);
 		}
 	};
@@ -54,13 +57,13 @@ function DeleteWordPage() {
 				<MyInputComponent
 					label="category to delete"
 					register={register}
-					error={errors["category to delete"]}
+					error={errors['category to delete']}
 					placeholder="category name"
 				/>
 				<MyInputComponent
 					label="word to delete"
 					register={register}
-					error={errors["word to delete"]}
+					error={errors['word to delete']}
 					placeholder="word"
 				/>
 				<SubmitBtn disabled={disabled} />

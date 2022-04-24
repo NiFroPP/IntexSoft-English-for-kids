@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import {useForm, SubmitHandler, FieldError} from 'react-hook-form';
+import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
 import schema from './update-category.validation';
 import allEndpoints from '../../../api';
+import { useActions } from '../../../hooks/useActions';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
 import { UpdateCategoryRequestDto } from '../../../models/dto/request/update-category.request.dto';
@@ -25,6 +26,7 @@ function UpdateCategoryPage() {
 	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
+	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
@@ -51,6 +53,7 @@ function UpdateCategoryPage() {
 			setResponseErr(response.data.message);
 			setDisabled(false);
 		} else {
+			fetchCategories();
 			navigate(PATHS.ADMIN_PANEL);
 		}
 	};
@@ -62,25 +65,25 @@ function UpdateCategoryPage() {
 				<MyInputComponent
 					label="category for update"
 					register={register}
-					error={errors["category for update"]}
+					error={errors['category for update']}
 					placeholder="name"
 				/>
 				<MyInputComponent
 					label="new category name"
 					register={register}
-					error={errors["new category name"]}
+					error={errors['new category name']}
 					placeholder="new name"
 				/>
 				<MyInputComponent
 					label="new category name in Russian"
 					register={register}
-					error={errors["new category name in Russian"]}
+					error={errors['new category name in Russian']}
 					placeholder="new rus name"
 				/>
 				<MyInputComponent
 					label="image"
 					register={register}
-					error={errors.image as (FieldError | undefined)}
+					error={errors.image as FieldError | undefined}
 					type="file"
 					accept="image/*"
 				/>

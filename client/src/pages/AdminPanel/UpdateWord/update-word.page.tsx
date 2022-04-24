@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import {useForm, SubmitHandler, FieldError} from 'react-hook-form';
+import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
 import schema from './update-word.validarion';
 import allEndpoints from '../../../api';
+import { useActions } from '../../../hooks/useActions';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import { getSoundAsString } from '../../../utils/getSoundAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
@@ -28,6 +29,7 @@ function UpdateWordPage() {
 	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
+	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
@@ -60,6 +62,7 @@ function UpdateWordPage() {
 			setResponseErr(response.data.message);
 			setDisabled(false);
 		} else {
+			fetchCategories();
 			navigate(PATHS.ADMIN_PANEL);
 		}
 	};
@@ -71,38 +74,38 @@ function UpdateWordPage() {
 				<MyInputComponent
 					label="category for updating"
 					register={register}
-					error={errors["category for updating"]}
+					error={errors['category for updating']}
 					placeholder="category name"
 				/>
 				<MyInputComponent
 					label="word for updating"
 					register={register}
-					error={errors["word for updating"]}
+					error={errors['word for updating']}
 					placeholder="word name"
 				/>
 				<MyInputComponent
 					label="new word in English"
 					register={register}
-					error={errors["new word in English"]}
+					error={errors['new word in English']}
 					placeholder="new eng name"
 				/>
 				<MyInputComponent
 					label="new word in Russian"
 					register={register}
-					error={errors["new word in Russian"]}
+					error={errors['new word in Russian']}
 					placeholder="new rus name"
 				/>
 				<MyInputComponent
 					label="image"
 					register={register}
-					error={errors.image as (FieldError | undefined)}
+					error={errors.image as FieldError | undefined}
 					type="file"
 					accept="image/*"
 				/>
 				<MyInputComponent
 					label="sound"
 					register={register}
-					error={errors.sound as (FieldError | undefined)}
+					error={errors.sound as FieldError | undefined}
 					type="file"
 					accept="audio/*"
 				/>

@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon",
-    "lint": "eslint --ext .js,.ts --fix"
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",

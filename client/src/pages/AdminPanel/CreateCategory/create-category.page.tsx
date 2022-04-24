@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import {useForm, SubmitHandler, FieldError} from 'react-hook-form';
+import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useNavigate } from 'react-router-dom';
 
 import schema from './create-category.validation';
 import allEndpoints from '../../../api';
+import { useActions } from '../../../hooks/useActions';
 import { getCompressedImageAsString } from '../../../utils/getImageAsString.utility';
 import PATHS from '../../../models/enum/paths.enum';
 import { CreateCategoryRequestDto } from '../../../models/dto/request/create-category.request.dto';
@@ -24,6 +25,7 @@ function CreateCategoryPage() {
 	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const navigate = useNavigate();
+	const { fetchCategories } = useActions();
 	const {
 		register,
 		handleSubmit,
@@ -45,6 +47,7 @@ function CreateCategoryPage() {
 			setResponseErr(response.data.message);
 			setDisabled(false);
 		} else {
+			fetchCategories();
 			navigate(PATHS.ADMIN_PANEL);
 		}
 	};
@@ -62,13 +65,13 @@ function CreateCategoryPage() {
 				<MyInputComponent
 					label="category in Russian"
 					register={register}
-					error={errors["category in Russian"]}
+					error={errors['category in Russian']}
 					placeholder="add category in Russian"
 				/>
 				<MyInputComponent
 					label="image"
 					register={register}
-					error={errors.image as (FieldError | undefined)}
+					error={errors.image as FieldError | undefined}
 					type="file"
 					accept="image/*"
 				/>

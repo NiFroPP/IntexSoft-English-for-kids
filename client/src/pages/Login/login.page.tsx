@@ -8,7 +8,7 @@ import {
 } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import schema from './validation';
 import allEndpoints from '../../api';
@@ -42,7 +42,6 @@ function Input({ label, register, required, errors }: InputProps) {
 
 function LoginPage() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const [responseErr, setResponseErr] = useState('');
 
 	const {
@@ -60,9 +59,12 @@ function LoginPage() {
 			localStorage.setItem('auth-token', JSON.stringify(response.data));
 			const user = getUserFromToken(response.data);
 			dispatch(
-				setUserData({ username: user.username, isAdmin: user.role === 'ADMIN' })
+				setUserData({
+					username: user.username,
+					isAdmin: user.role === 'ADMIN',
+					isLogin: true
+				})
 			);
-			navigate(PATHS.ABOUT);
 		}
 	};
 
