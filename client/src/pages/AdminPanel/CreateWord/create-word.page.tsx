@@ -50,47 +50,49 @@ function CreateWordPage() {
 	);
 
 	return (
-		<div className="admin-panel-page__field">
-			<h2 className="admin-panel-page__title">Create word:</h2>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<MyInputComponent
-					label="category for adding word"
-					register={register}
-					error={errors['category for adding word']}
-					placeholder="category name"
-				/>
-				<MyInputComponent
-					label="word in English"
-					register={register}
-					error={errors['word in English']}
-					placeholder="add word in English"
-				/>
+		<div className="admin-panel-page__container">
+			<div className="admin-panel-page__field">
+				<h2 className="admin-panel-page__title">Create word:</h2>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<MyInputComponent
+						label="category for adding word"
+						register={register}
+						error={errors['category for adding word']}
+						placeholder="category name"
+					/>
+					<MyInputComponent
+						label="word in English"
+						register={register}
+						error={errors['word in English']}
+						placeholder="add word in English"
+					/>
 
-				<MyInputComponent
-					label="word in Russian"
-					register={register}
-					error={errors['word in Russian']}
-					placeholder="add word in Russian"
-				/>
-				<MyInputComponent
-					label="image"
-					register={register}
-					error={errors.image as FieldError | undefined}
-					type="file"
-					accept="image/*"
-				/>
-				<MyInputComponent
-					label="sound"
-					register={register}
-					error={errors.sound as FieldError | undefined}
-					type="file"
-					accept="audio/*"
-				/>
-				<SubmitBtn disabled={disabled} />
-			</form>
-			{responseErr ? (
-				<h2 className="login-page__error">{responseErr}</h2>
-			) : null}
+					<MyInputComponent
+						label="word in Russian"
+						register={register}
+						error={errors['word in Russian']}
+						placeholder="add word in Russian"
+					/>
+					<MyInputComponent
+						label="image"
+						register={register}
+						error={errors.image as FieldError | undefined}
+						type="file"
+						accept="image/*"
+					/>
+					<MyInputComponent
+						label="sound"
+						register={register}
+						error={errors.sound as FieldError | undefined}
+						type="file"
+						accept="audio/*"
+					/>
+					<SubmitBtn disabled={disabled} />
+				</form>
+				{responseErr ? (
+					<h2 className="login-page__error">{responseErr}</h2>
+				) : null}
+			</div>
 		</div>
 	);
 }

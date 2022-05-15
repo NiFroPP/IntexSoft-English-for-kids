@@ -44,39 +44,41 @@ function UpdateCategoryPage() {
 	);
 
 	return (
-		<div className="admin-panel-page__field">
-			<h2 className="admin-panel-page__title">Update category:</h2>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<MyInputComponent
-					label="category for update"
-					register={register}
-					error={errors['category for update']}
-					placeholder="name"
-				/>
-				<MyInputComponent
-					label="new category name"
-					register={register}
-					error={errors['new category name']}
-					placeholder="new name"
-				/>
-				<MyInputComponent
-					label="new category name in Russian"
-					register={register}
-					error={errors['new category name in Russian']}
-					placeholder="new rus name"
-				/>
-				<MyInputComponent
-					label="image"
-					register={register}
-					error={errors.image as FieldError | undefined}
-					type="file"
-					accept="image/*"
-				/>
-				<SubmitBtn disabled={disabled} />
-			</form>
-			{responseErr ? (
-				<h2 className="login-page__error">{responseErr}</h2>
-			) : null}
+		<div className="admin-panel-page__container">
+			<div className="admin-panel-page__field">
+				<h2 className="admin-panel-page__title">Update category:</h2>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<MyInputComponent
+						label="category for update"
+						register={register}
+						error={errors['category for update']}
+						placeholder="name"
+					/>
+					<MyInputComponent
+						label="new category name"
+						register={register}
+						error={errors['new category name']}
+						placeholder="new name"
+					/>
+					<MyInputComponent
+						label="new category name in Russian"
+						register={register}
+						error={errors['new category name in Russian']}
+						placeholder="new rus name"
+					/>
+					<MyInputComponent
+						label="image"
+						register={register}
+						error={errors.image as FieldError | undefined}
+						type="file"
+						accept="image/*"
+					/>
+					<SubmitBtn disabled={disabled} />
+				</form>
+				{responseErr ? (
+					<h2 className="login-page__error">{responseErr}</h2>
+				) : null}
+			</div>
 		</div>
 	);
 }

@@ -59,23 +59,35 @@ function RegistrationPage() {
 	};
 
 	return (
-		<div className="registration-page__field">
-			<form
-				className="registration-page__form"
-				onSubmit={handleSubmit(onSubmit)}>
-				<Input label="username" register={register} required errors={errors} />
-				<Input label="email" register={register} required errors={errors} />
-				<Input label="password" register={register} required errors={errors} />
-				<div className="registration-page__btn">
-					<Link className="registration-page__go-to-login" to={PATHS.LOGIN}>
-						Login
-					</Link>
-					<input type="submit" />
-				</div>
-			</form>
-			{responseErr ? (
-				<h2 className="registration-page__error">{responseErr}</h2>
-			) : null}
+		<div className="registration-page__container">
+			<div className="registration-page__field">
+				<form
+					className="registration-page__form"
+					onSubmit={handleSubmit(onSubmit)}>
+					<Input
+						label="username"
+						register={register}
+						required
+						errors={errors}
+					/>
+					<Input label="email" register={register} required errors={errors} />
+					<Input
+						label="password"
+						register={register}
+						required
+						errors={errors}
+					/>
+					<div className="registration-page__btn">
+						<Link className="registration-page__go-to-login" to={PATHS.LOGIN}>
+							Login
+						</Link>
+						<input type="submit" />
+					</div>
+				</form>
+				{responseErr ? (
+					<h2 className="registration-page__error">{responseErr}</h2>
+				) : null}
+			</div>
 		</div>
 	);
 }

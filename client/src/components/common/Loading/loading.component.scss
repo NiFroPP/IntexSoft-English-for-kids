@@ -1,9 +1,14 @@
 @import '../../../assets/styles/variables';
+@import "src/assets/styles/mixins.scss";
 
 .loading {
   display: inline-block;
   width: 80px;
   height: 80px;
+
+  &__container {
+    @include container
+  }
 
   &:after {
     content: ' ';

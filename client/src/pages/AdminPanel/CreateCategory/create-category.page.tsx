@@ -42,33 +42,35 @@ function CreateCategoryPage() {
 	);
 
 	return (
-		<div className="admin-panel-page__field">
-			<h2 className="admin-panel-page__title">Create category:</h2>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<MyInputComponent
-					label="category"
-					register={register}
-					error={errors.category}
-					placeholder="add category"
-				/>
-				<MyInputComponent
-					label="category in Russian"
-					register={register}
-					error={errors['category in Russian']}
-					placeholder="add category in Russian"
-				/>
-				<MyInputComponent
-					label="image"
-					register={register}
-					error={errors.image as FieldError | undefined}
-					type="file"
-					accept="image/*"
-				/>
-				<SubmitBtn disabled={disabled} />
-			</form>
-			{responseErr ? (
-				<h2 className="login-page__error">{responseErr}</h2>
-			) : null}
+		<div className="admin-panel-page__container">
+			<div className="admin-panel-page__field">
+				<h2 className="admin-panel-page__title">Create category:</h2>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<MyInputComponent
+						label="category"
+						register={register}
+						error={errors.category}
+						placeholder="add category"
+					/>
+					<MyInputComponent
+						label="category in Russian"
+						register={register}
+						error={errors['category in Russian']}
+						placeholder="add category in Russian"
+					/>
+					<MyInputComponent
+						label="image"
+						register={register}
+						error={errors.image as FieldError | undefined}
+						type="file"
+						accept="image/*"
+					/>
+					<SubmitBtn disabled={disabled} />
+				</form>
+				{responseErr ? (
+					<h2 className="login-page__error">{responseErr}</h2>
+				) : null}
+			</div>
 		</div>
 	);
 }

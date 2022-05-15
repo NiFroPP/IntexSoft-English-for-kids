@@ -20,4 +20,11 @@
       width: 33.3%;
     }
   }
+
+  &__no_words {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    font-size: 2rem;
+  }
 }

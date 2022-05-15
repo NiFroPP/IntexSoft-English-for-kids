@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 import { IRoutes } from '../routes.component';
 import PATHS from '../../../models/enum/paths.enum';
@@ -14,5 +15,6 @@ export default [
 	{
 		path: PATHS.REGISTRATION,
 		element: <RegistrationPage />
-	}
+	},
+	{ path: PATHS.OTHER, element: <Navigate to={PATHS.LOGIN} /> }
 ] as IRoutes[];

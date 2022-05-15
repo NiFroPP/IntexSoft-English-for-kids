@@ -1,8 +1,14 @@
 @import "src/assets/styles/variables";
+@import "src/assets/styles/mixins.scss";
 
 .home-page {
   font-size: 24px;
   color: $main-text;
+
+  &__container {
+    @include container
+  }
+
 
   & p {
     padding-bottom: 10px;

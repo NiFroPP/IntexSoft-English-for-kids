@@ -1,6 +1,11 @@
 @import "src/assets/styles/variables";
+@import "src/assets/styles/mixins.scss";
 
 .admin-panel-page {
+  &__container {
+    @include container
+  }
+
   &__field {
     min-width: 300px;
     border: 1px solid $main-text;

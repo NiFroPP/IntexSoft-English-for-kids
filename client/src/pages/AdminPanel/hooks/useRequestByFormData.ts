@@ -10,7 +10,7 @@ import PATHS from '../../../models/enum/paths.enum';
 type MakeRequest<Inputs> = (
 	data: UnpackNestedValue<Inputs>
 ) => Promise<Response<unknown, ErrorResponseDto>>;
-type UseRequestByFormData<Inputs> = [boolean, string, MakeRequest<Inputs>];
+type UseRequestByFormData<Inputs> = [boolean, string, SubmitHandler<Inputs>];
 
 const useRequestByFormData = <Inputs>(
 	makeRequest: MakeRequest<Inputs>

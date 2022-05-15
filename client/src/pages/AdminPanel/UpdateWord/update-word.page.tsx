@@ -53,52 +53,54 @@ function UpdateWordPage() {
 	);
 
 	return (
-		<div className="admin-panel-page__field">
-			<h2 className="admin-panel-page__title">Update word:</h2>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<MyInputComponent
-					label="category for updating"
-					register={register}
-					error={errors['category for updating']}
-					placeholder="category name"
-				/>
-				<MyInputComponent
-					label="word for updating"
-					register={register}
-					error={errors['word for updating']}
-					placeholder="word name"
-				/>
-				<MyInputComponent
-					label="new word in English"
-					register={register}
-					error={errors['new word in English']}
-					placeholder="new eng name"
-				/>
-				<MyInputComponent
-					label="new word in Russian"
-					register={register}
-					error={errors['new word in Russian']}
-					placeholder="new rus name"
-				/>
-				<MyInputComponent
-					label="image"
-					register={register}
-					error={errors.image as FieldError | undefined}
-					type="file"
-					accept="image/*"
-				/>
-				<MyInputComponent
-					label="sound"
-					register={register}
-					error={errors.sound as FieldError | undefined}
-					type="file"
-					accept="audio/*"
-				/>
-				<SubmitBtn disabled={disabled} />
-			</form>
-			{responseErr ? (
-				<h2 className="login-page__error">{responseErr}</h2>
-			) : null}
+		<div className="admin-panel-page__container">
+			<div className="admin-panel-page__field">
+				<h2 className="admin-panel-page__title">Update word:</h2>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<MyInputComponent
+						label="category for updating"
+						register={register}
+						error={errors['category for updating']}
+						placeholder="category name"
+					/>
+					<MyInputComponent
+						label="word for updating"
+						register={register}
+						error={errors['word for updating']}
+						placeholder="word name"
+					/>
+					<MyInputComponent
+						label="new word in English"
+						register={register}
+						error={errors['new word in English']}
+						placeholder="new eng name"
+					/>
+					<MyInputComponent
+						label="new word in Russian"
+						register={register}
+						error={errors['new word in Russian']}
+						placeholder="new rus name"
+					/>
+					<MyInputComponent
+						label="image"
+						register={register}
+						error={errors.image as FieldError | undefined}
+						type="file"
+						accept="image/*"
+					/>
+					<MyInputComponent
+						label="sound"
+						register={register}
+						error={errors.sound as FieldError | undefined}
+						type="file"
+						accept="audio/*"
+					/>
+					<SubmitBtn disabled={disabled} />
+				</form>
+				{responseErr ? (
+					<h2 className="login-page__error">{responseErr}</h2>
+				) : null}
+			</div>
 		</div>
 	);
 }

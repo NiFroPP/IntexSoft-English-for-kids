@@ -69,20 +69,29 @@ function LoginPage() {
 	};
 
 	return (
-		<div className="login-page__field">
-			<form className="login-page__form" onSubmit={handleSubmit(onSubmit)}>
-				<Input label="email" register={register} required errors={errors} />
-				<Input label="password" register={register} required errors={errors} />
-				<div className="login-page__btn">
-					<Link className="login-page__go-to-register" to={PATHS.REGISTRATION}>
-						Create account
-					</Link>
-					<input type="submit" />
-				</div>
-			</form>
-			{responseErr ? (
-				<h2 className="login-page__error">{responseErr}</h2>
-			) : null}
+		<div className="login-page__container">
+			<div className="login-page__field">
+				<form className="login-page__form" onSubmit={handleSubmit(onSubmit)}>
+					<Input label="email" register={register} required errors={errors} />
+					<Input
+						label="password"
+						register={register}
+						required
+						errors={errors}
+					/>
+					<div className="login-page__btn">
+						<Link
+							className="login-page__go-to-register"
+							to={PATHS.REGISTRATION}>
+							Create account
+						</Link>
+						<input type="submit" />
+					</div>
+				</form>
+				{responseErr ? (
+					<h2 className="login-page__error">{responseErr}</h2>
+				) : null}
+			</div>
 		</div>
 	);
 }

@@ -33,20 +33,22 @@ function DeleteCategoryPage() {
 	);
 
 	return (
-		<div className="admin-panel-page__field">
-			<h2 className="admin-panel-page__title">Delete category:</h2>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<MyInputComponent
-					label="category to delete"
-					register={register}
-					error={errors['category to delete']}
-					placeholder="name"
-				/>
-				<SubmitBtn disabled={disabled} />
-			</form>
-			{responseErr ? (
-				<h2 className="login-page__error">{responseErr}</h2>
-			) : null}
+		<div className="admin-panel-page__container">
+			<div className="admin-panel-page__field">
+				<h2 className="admin-panel-page__title">Delete category:</h2>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<MyInputComponent
+						label="category to delete"
+						register={register}
+						error={errors['category to delete']}
+						placeholder="name"
+					/>
+					<SubmitBtn disabled={disabled} />
+				</form>
+				{responseErr ? (
+					<h2 className="login-page__error">{responseErr}</h2>
+				) : null}
+			</div>
 		</div>
 	);
 }

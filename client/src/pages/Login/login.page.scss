@@ -1,6 +1,11 @@
 @import "src/assets/styles/variables.scss";
+@import "src/assets/styles/mixins.scss";
 
 .login-page {
+  &__container {
+    @include container
+  }
+
   &__field {
     border: 1px solid $main-text;
     border-radius: 5px;
