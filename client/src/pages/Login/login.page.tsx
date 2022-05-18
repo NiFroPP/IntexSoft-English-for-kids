@@ -6,13 +6,12 @@ import {
 	UseFormRegister,
 	FieldErrors
 } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 
 import schema from './validation';
 import allEndpoints from '../../api';
-import { setUserData } from '../../store/reducers/user.reducer';
+import { useActions } from '../../hooks/useActions';
 import { getUserFromToken } from '../../utils/getUserFromToken';
 import PATHS from '../../models/enum/paths.enum';
 import { LoginRequestDto } from '../../models/dto/login.request.dto';
@@ -41,9 +40,9 @@ function Input({ label, register, required, errors }: InputProps) {
 }
 
 function LoginPage() {
-	const dispatch = useDispatch();
 	const [responseErr, setResponseErr] = useState('');
 
+	const { setUserData } = useActions();
 	const {
 		register,
 		handleSubmit,
@@ -58,19 +57,30 @@ function LoginPage() {
 		} else {
 			localStorage.setItem('auth-token', JSON.stringify(response.data));
 			const user = getUserFromToken(response.data);
-			dispatch(
-				setUserData({
-					username: user.username,
-					isAdmin: user.role === 'ADMIN',
-					isLogin: true
-				})
-			);
+
+			setUserData({
+				username: user.username,
+				isAdmin: user.role === 'ADMIN',
+				isLogin: true
+			});
 		}
 	};
+
+	// const responseGoogle = (response: any) => {
+	// 	console.log(response);
+	// };
 
 	return (
 		<div className="login-page__container">
 			<div className="login-page__field">
+				{/* <GoogleLogin */}
+				{/*	clientId="410658255266-hagghd75id77t3e15qjumrmcv42vmrrm.apps.googleusercontent.com" */}
+				{/*	buttonText="Login" */}
+				{/*	onSuccess={responseGoogle} */}
+				{/*	onFailure={responseGoogle} */}
+				{/*	cookiePolicy="single_host_origin" */}
+				{/* /> */}
+
 				<form className="login-page__form" onSubmit={handleSubmit(onSubmit)}>
 					<Input label="email" register={register} required errors={errors} />
 					<Input

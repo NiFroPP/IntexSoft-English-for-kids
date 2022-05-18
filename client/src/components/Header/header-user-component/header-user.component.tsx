@@ -1,39 +1,36 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
-import { useAppSelector } from '../../../hooks/useTypeSelector';
-import { useActions } from '../../../hooks/useActions';
 import { getUser } from '../../../store/selectors/index.selector';
-import { setUserData } from '../../../store/reducers/user.reducer';
+import { useAppSelector } from '../../../hooks/useTypeSelector';
 import { getUserFromToken } from '../../../utils/getUserFromToken';
 import PATHS from '../../../models/enum/paths.enum';
-
 import HeaderAdminPanel from '../header-admin-panel-component/header-admin-panel.component';
 import MyButton from '../../common/MyButton/my-button.component';
 
 import './header-user.component.scss';
+import { useActions } from '../../../hooks/useActions';
 
 function HeaderUserComponent() {
 	const { username, isLogin } = useAppSelector(getUser);
-	const { fetchCategories } = useActions();
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const { setUserData, fetchCategoriesAC, fetchFavoriteCategoriesAC } =
+		useActions();
 
 	const loading = () => {
 		const token = localStorage.getItem('auth-token');
 		if (token) {
 			const user = getUserFromToken(JSON.parse(token));
 
-			dispatch(
-				setUserData({
-					isLogin: true,
-					username: user.username,
-					isAdmin: user.role === 'ADMIN'
-				})
-			);
+			setUserData({
+				isLogin: true,
+				username: user.username,
+				isAdmin: user.role === 'ADMIN'
+			});
+
 			if (username) {
-				fetchCategories();
+				fetchCategoriesAC();
+				fetchFavoriteCategoriesAC();
 			}
 			navigate(PATHS.CATEGORY);
 		}
@@ -43,7 +40,7 @@ function HeaderUserComponent() {
 
 	const logout = () => {
 		localStorage.removeItem('auth-token');
-		dispatch(setUserData({ username: '', isLogin: false, isAdmin: false }));
+		setUserData({ username: '', isLogin: false, isAdmin: false });
 	};
 
 	return (

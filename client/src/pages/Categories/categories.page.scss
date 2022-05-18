@@ -44,5 +44,13 @@
       background: no-repeat center;
       background-size: contain;
     }
+
+    &-star {
+      width: 16px;
+      height: 16px;
+
+      position: absolute;
+      padding: 5px;
+    }
   }
 }

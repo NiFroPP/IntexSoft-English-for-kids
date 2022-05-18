@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, UnpackNestedValue } from 'react-hook-form';
 
 import { Response } from '../../../api/api-client/api-client';
-import { useActions } from '../../../hooks/useActions';
 import { ErrorResponseDto } from '../../../models/dto/error.response.dto';
 import PATHS from '../../../models/enum/paths.enum';
+import { useActions } from '../../../hooks/useActions';
 
 type MakeRequest<Inputs> = (
 	data: UnpackNestedValue<Inputs>
@@ -17,8 +17,8 @@ const useRequestByFormData = <Inputs>(
 ): UseRequestByFormData<Inputs> => {
 	const [responseErr, setResponseErr] = useState('');
 	const [disabled, setDisabled] = useState(false);
+	const { fetchCategoriesAC } = useActions();
 	const navigate = useNavigate();
-	const { fetchCategories } = useActions();
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		setDisabled(true);
@@ -28,7 +28,7 @@ const useRequestByFormData = <Inputs>(
 			setResponseErr(response.data.message);
 			setDisabled(false);
 		} else {
-			fetchCategories();
+			fetchCategoriesAC();
 			navigate(PATHS.ADMIN_PANEL);
 		}
 	};

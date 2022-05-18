@@ -7,6 +7,7 @@ interface User {
 	password: string;
 	username: string;
 	role: string;
+	favoriteCategory: string[];
 }
 
 interface DecodeToken {

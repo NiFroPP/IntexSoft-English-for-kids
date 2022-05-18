@@ -1,12 +1,7 @@
 import { Dispatch } from 'react';
-
-import allEndpoints from '../../api';
-import { CategoryRequestDto } from '../../models/dto/category.request.dto';
-import {
-	Category,
-	CategoryActionType,
-	setCategoryData
-} from '../reducers/category.reducer';
+import { setCategoryData } from 'store/reducers/action-creators/category.action';
+import { Category } from 'store/reducers/types/category.reducer';
+import { CategoryActionType } from '../reducers/category.reducer';
 
 type FetchCategoryData = () => Promise<Partial<Category>>;
 
@@ -23,27 +18,11 @@ const createFetcher = (fetchCategoryData: FetchCategoryData) => {
 	};
 };
 
-export const fetchCategories = () => {
-	return createFetcher(async () => {
-		return {
-			categories: await allEndpoints.category.getAllCategoriesWithoutCards()
-		};
-	});
-};
-
-export const fetchCategory = (name: CategoryRequestDto) => {
-	return createFetcher(async () => {
-		const response = await allEndpoints.category.getOneCategory(name);
-		return {
-			cards: response.cards
-		};
-	});
-};
-
-export const fetchAllWords = () => {
-	return createFetcher(async () => {
-		return {
-			words: await allEndpoints.category.getAllWords()
-		};
-	});
-};
+// export const fetchCategory = (name: CategoryRequestDto) => {
+// 	return createFetcher(async () => {
+// 		const response = await allEndpoints.category.getOneCategory(name);
+// 		return {
+// 			cards: response.cards
+// 		};
+// 	});
+// };

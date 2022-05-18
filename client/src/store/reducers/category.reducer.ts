@@ -1,17 +1,9 @@
-import { WordDto } from 'models/dto/word.dto';
-import { CategoryWithoutCardsDto } from 'models/dto/categoriesWithoutCards.dto';
-import { Card } from '../../pages/Category/category.page';
+import { setCategoryData } from './action-creators/category.action';
+import { Category, CategoryActionTypes } from './types/category.reducer';
 
-export const SET_DATA = '[category-reducer] SET_DATA';
+const { SET_DATA } = CategoryActionTypes;
 
 export type CategoryActionType = ReturnType<typeof setCategoryData>;
-export interface Category {
-	isLoading: boolean;
-	categories: CategoryWithoutCardsDto[];
-	cards: Card[];
-	errors: null | string;
-	words: WordDto[];
-}
 
 const initialStore: Category = {
 	isLoading: false,
@@ -20,11 +12,6 @@ const initialStore: Category = {
 	errors: null,
 	words: []
 };
-
-export const setCategoryData = (payload: Partial<Category>) => ({
-	type: SET_DATA,
-	payload
-});
 
 const categoryReducer = (
 	state: Category = initialStore,

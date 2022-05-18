@@ -1,0 +1,35 @@
+@import '../../../assets/styles/variables';
+@import "src/assets/styles/mixins.scss";
+
+.loading-little {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+
+  &__container {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    margin: 5px;
+  }
+
+  &:after {
+    content: ' ';
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid $header-background;
+    animation: lds-dual-ring 1.2s linear infinite;
+    border-color: $header-background transparent;
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

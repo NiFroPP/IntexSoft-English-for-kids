@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useActions } from '../../hooks/useActions';
-import { useAppSelector } from '../../hooks/useTypeSelector';
 import { getCategory } from '../../store/selectors/index.selector';
-
+import { useAppSelector } from '../../hooks/useTypeSelector';
+import { useActions } from '../../hooks/useActions';
 import CategoryCardComponent from './Card/category-card.component';
 import LoadingComponent from '../../components/common/Loading/loading.component';
 
@@ -19,11 +18,11 @@ export interface Card {
 
 function CategoryPage() {
 	const params = useParams();
-	const { fetchCategory } = useActions();
+	const { fetchOneCategoryAC } = useActions();
 	const { cards, isLoading, errors } = useAppSelector(getCategory);
 
 	useEffect(() => {
-		fetchCategory({ name: params.id });
+		fetchOneCategoryAC({ name: params.id });
 	}, [params.id]);
 
 	if (isLoading) return <LoadingComponent />;

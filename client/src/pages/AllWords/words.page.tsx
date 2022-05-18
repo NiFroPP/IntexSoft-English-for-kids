@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useTypeSelector';
+import { useActions } from '../../hooks/useActions';
 import { useSortedAndSearchedWords } from '../../hooks/useSortedAndSearchedWords';
 import { getCategory } from '../../store/selectors/index.selector';
 import { WordDto } from '../../models/dto/word.dto';
@@ -16,7 +16,7 @@ function WordsPage() {
 	const defaultSortType = 'name';
 	const [sortType, setSortType] = useState<keyof WordDto>(defaultSortType);
 	const [searchQuery, setSearchQuery] = useState('');
-	const { fetchAllWords } = useActions();
+	const { fetchAllWordsAC } = useActions();
 	const { words, isLoading } = useAppSelector(getCategory);
 	const sortedAndSearchedWords = useSortedAndSearchedWords(
 		words,
@@ -25,7 +25,7 @@ function WordsPage() {
 	);
 
 	useEffect(() => {
-		fetchAllWords();
+		fetchAllWordsAC();
 	}, []);
 
 	const onSearch = (e: ChangeEvent<HTMLInputElement>) => {

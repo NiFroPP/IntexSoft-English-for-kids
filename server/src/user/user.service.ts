@@ -7,6 +7,8 @@ import CustomErrors from '../errors/API.error'
 import { LoginResponseDto } from './dto/login.response.dto'
 import { LoginRequestDto } from './dto/login.request.dto'
 import { RegistrationRequestDto } from './dto/registration.request.dto'
+import { FollowServiceRequestDto } from './dto/follow.service.request.dto'
+import { WordsResponseDto } from '../category/dto/words.response.dto'
 
 class UserService {
   constructor(private model: Model<User>) {
@@ -52,6 +54,36 @@ class UserService {
         expiresIn: '30d',
       }),
     }
+  }
+
+  async follow({
+    email,
+    id,
+    isFavorite,
+  }: FollowServiceRequestDto): Promise<User> {
+    const user = await this.model.findOne({ email })
+    if (!user) {
+      throw CustomErrors.badRequestError(`User with email: ${email} not exist`)
+    }
+
+    await this.model.updateOne(
+      { email },
+      isFavorite
+        ? {
+            $pull: { favoriteCategory: id },
+          }
+        : {
+            $addToSet: {
+              favoriteCategory: id,
+            },
+          }
+    )
+
+    return user
+  }
+
+  async getFavorite(email: string): Promise<Partial<User>[]> {
+    return this.model.find({ email }, { favoriteCategory: 1 })
   }
 }
 

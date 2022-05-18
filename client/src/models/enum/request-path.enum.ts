@@ -1,6 +1,8 @@
 enum REQUEST_PATH {
 	LOGIN = '/users/login',
 	REGISTRATION = '/users/registration',
+	FOLLOW = '/users/follow',
+	FAVORITE = '/users/favorite',
 	GET_ALL_CATEGORIES = '/categories/all',
 	GET_ONE_CATEGORY = '/categories',
 	GET_ALL_WORDS = '/categories/words',
