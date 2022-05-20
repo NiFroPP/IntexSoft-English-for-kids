@@ -1,9 +1,11 @@
-import { setCategoryData } from './action-creators/category.action';
-import { Category, CategoryActionTypes } from './types/category.reducer';
+import {
+	Category,
+	CategoryActionType,
+	CategoryActionTypes
+} from './types/category.reducer';
+import { getUpdateCategories } from '../utils/getUpdateCategories';
 
-const { SET_DATA } = CategoryActionTypes;
-
-export type CategoryActionType = ReturnType<typeof setCategoryData>;
+const { SET_DATA, UPDATE_CATEGORIES } = CategoryActionTypes;
 
 const initialStore: Category = {
 	isLoading: false,
@@ -15,12 +17,19 @@ const initialStore: Category = {
 
 const categoryReducer = (
 	state: Category = initialStore,
-	{ type, payload }: CategoryActionType
+	action: CategoryActionType
 ): Category => {
-	switch (type) {
+	switch (action.type) {
 		case SET_DATA: {
-			return { ...state, ...payload };
+			return { ...state, ...action.payload };
 		}
+		case UPDATE_CATEGORIES: {
+			return {
+				...state,
+				categories: getUpdateCategories(state, action.payload)
+			};
+		}
+
 		default:
 			return state;
 	}
