@@ -5,10 +5,14 @@
   font-size: 24px;
   color: $main-text;
 
-  &__container {
-    @include container
-  }
+  //&__container {
+  //  @include container
+  //}
 
+  &__tree {
+    display: flex;
+    flex-direction: row;
+  }
 
   & p {
     padding-bottom: 10px;
@@ -23,4 +27,18 @@
       text-decoration: none;
     }
   }
+}
+
+.p-tree {
+  width: 300px;
+  margin: 20px;
+}
+
+.form-demo {
+  width: 300px;
+  margin: 20px;
+}
+
+.text-center {
+  padding-bottom: 10px;
 }

@@ -66,21 +66,9 @@ function LoginPage() {
 		}
 	};
 
-	// const responseGoogle = (response: any) => {
-	// 	console.log(response);
-	// };
-
 	return (
 		<div className="login-page__container">
 			<div className="login-page__field">
-				{/* <GoogleLogin */}
-				{/*	clientId="410658255266-hagghd75id77t3e15qjumrmcv42vmrrm.apps.googleusercontent.com" */}
-				{/*	buttonText="Login" */}
-				{/*	onSuccess={responseGoogle} */}
-				{/*	onFailure={responseGoogle} */}
-				{/*	cookiePolicy="single_host_origin" */}
-				{/* /> */}
-
 				<form className="login-page__form" onSubmit={handleSubmit(onSubmit)}>
 					<Input label="email" register={register} required errors={errors} />
 					<Input

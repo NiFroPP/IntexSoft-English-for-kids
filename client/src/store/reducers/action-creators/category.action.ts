@@ -3,12 +3,19 @@ import {
 	CategoryActionTypes,
 	FetchAllWordsAC,
 	FetchCategoriesAC,
-	FetchOneCategoryAC
+	FetchOneCategoryAC,
+	UpdateCategoriesAC,
+	UpdateCategoriesProps
 } from '../types/category.reducer';
 import { CategoryRequestDto } from '../../../models/dto/category.request.dto';
 
-const { SET_DATA, ALL_WORDS, GET_CATEGORIES, GET_ONE_CATEGORY } =
-	CategoryActionTypes;
+const {
+	SET_DATA,
+	ALL_WORDS,
+	GET_CATEGORIES,
+	GET_ONE_CATEGORY,
+	UPDATE_CATEGORIES
+} = CategoryActionTypes;
 
 export const setCategoryData = (payload: Partial<Category>) => ({
 	type: SET_DATA,
@@ -25,4 +32,10 @@ export const fetchOneCategoryAC = (
 ): FetchOneCategoryAC => ({
 	type: GET_ONE_CATEGORY,
 	payload: name
+});
+export const updateCategoriesAC = (
+	payload: UpdateCategoriesProps
+): UpdateCategoriesAC => ({
+	type: UPDATE_CATEGORIES,
+	payload
 });
